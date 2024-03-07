@@ -16,7 +16,7 @@ function App() {
         <div className="App">
             <div>
                 <img src={gifImage}
-                     alt="cat gif"
+                     alt="Cat gif"
                      onClick={handleClick}
                      style={{
                          cursor: 'pointer',
