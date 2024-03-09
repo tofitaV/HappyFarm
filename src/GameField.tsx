@@ -40,7 +40,7 @@ const GameField: React.FC<Props> = ({selectedElement}) => {
                 } else {
                     cellContent = (
                         <div className="empty" key={`${i}-${j}`}
-                             onClick={() => placeIntoGardenBeds(i, j, selectedItem)}>
+                             onClick={() => placeIntoGardenBeds(i, j, selectedItem)} style={{width: '100%'}}>
                             {/* Add some content to the empty cells */}
                             &nbsp;
                         </div>
@@ -58,12 +58,7 @@ const GameField: React.FC<Props> = ({selectedElement}) => {
     };
 
     return (
-        <div className="game-field" style={{
-            position: 'absolute',
-            top: '10%',
-            left: '35%',
-            textAlign: 'center'
-        }}>
+        <div className="game-field">
             {renderGrid()}
         </div>
     );

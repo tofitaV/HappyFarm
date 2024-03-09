@@ -3,6 +3,7 @@ import FloatingButton from './FloatingButton';
 import GameField from "./GameField";
 
 const GlobalWindow = () => {
+    Telegram.WebApp.ready()
     const [selectedElement, setSelectedElement] = useState<string>('');
 
     const handleElementSelection = (element: string) => {
@@ -11,7 +12,12 @@ const GlobalWindow = () => {
     };
 
     return (
-        <div>
+        <div style={{
+            display:"flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: '100vh'
+        }}>
             <FloatingButton
                 handleElementSelection={handleElementSelection}
             />
