@@ -6,8 +6,8 @@ interface Props {
 }
 
 const GameField: React.FC<Props> = ({selectedElement}) => {
-    const rows = 5;
-    const cols = 6;
+    const rows = 10;
+    const cols = 10;
 
     const initialCells: (string | null)[][] = Array.from({length: rows}, () =>
         Array.from({length: cols}, () => null)
@@ -60,8 +60,9 @@ const GameField: React.FC<Props> = ({selectedElement}) => {
     return (
         <div className="game-field" style={{
             position: 'absolute',
-            top: '30%',
-            left: '43%'
+            top: '10%',
+            left: '35%',
+            textAlign: 'center'
         }}>
             {renderGrid()}
         </div>
