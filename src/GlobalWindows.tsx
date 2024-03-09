@@ -6,9 +6,15 @@ import {Plant} from "./Plants";
 const GlobalWindow = () => {
     Telegram.WebApp.ready()
     const [selectedElement, setSelectedElement] = useState<Plant>({name: '', dateTime: new Date()});
+    const [digUp, setDigUp] = useState(false);
 
     const handleElementSelection = (plant: Plant) => {
         setSelectedElement(plant);
+    };
+
+    const toggleDigUp = () => {
+        setDigUp(!digUp);
+        return digUp;
     };
 
     return (
@@ -20,8 +26,9 @@ const GlobalWindow = () => {
         }}>
             <FloatingButton
                 handleElementSelection={handleElementSelection}
+                digUp={toggleDigUp}
             />
-            <GameField plant={selectedElement}/>
+            <GameField plant={selectedElement} digUp={digUp}/>
         </div>
     );
 };

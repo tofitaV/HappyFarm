@@ -4,14 +4,18 @@ import './FloatingButton.css';
 
 interface Props {
     handleElementSelection: (plant: Plant) => void;
+    digUp: () => boolean;
 }
 
-const FloatingButton: React.FC<Props> = ({handleElementSelection}) => {
+const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp}) => {
     const [showSecondRow, setShowSecondRow] = useState(false);
+
 
     const toggleSecondRow = () => {
         setShowSecondRow(!showSecondRow);
     };
+
+
 
     return (
         <div className="action-buttons">
@@ -33,7 +37,7 @@ const FloatingButton: React.FC<Props> = ({handleElementSelection}) => {
                     <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>
                         Полить
                     </button>
-                    <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>
+                    <button onClick={digUp}>
                         Выкопать
                     </button>
                     <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>

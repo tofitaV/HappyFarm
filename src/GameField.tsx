@@ -4,9 +4,10 @@ import {Plant} from "./Plants";
 
 interface Props {
     plant: Plant;
+    digUp: boolean
 }
 
-const GameField: React.FC<Props> = ({plant}) => {
+const GameField: React.FC<Props> = ({plant, digUp}) => {
     const rows = 10;
     const cols = 10;
 
@@ -18,11 +19,13 @@ const GameField: React.FC<Props> = ({plant}) => {
     const [cells, setCells] = useState<(Plant | null)[][]>(initialCells);
     const [plants, setPlants] = useState<Plant[]>([]);
     const selectedItem = plant;
-
+    const isDigUp = digUp;
     const placeIntoGardenBeds = (row: number, col: number, plant: Plant) => {
-        const newCells = cells.map((row) => [...row]);
-        newCells[row][col] = {...plant, dateTime: new Date()};
-        setCells(newCells);
+        if (!isDigUp){
+            const newCells = cells.map((row) => [...row]);
+            newCells[row][col] = {...plant, dateTime: new Date()};
+            setCells(newCells);
+        }
     };
 
 
@@ -34,6 +37,14 @@ const GameField: React.FC<Props> = ({plant}) => {
         }
     };
 
+    const deletePlantInGardenBeds = (row: number, col: number) => {
+        if (isDigUp) {
+            const newCells = [...cells];
+            newCells[row][col] = null;
+            setCells(newCells);
+        }
+    }
+
     const renderGrid = () => {
         const grid = [];
         for (let i = 0; i < rows; i++) {
@@ -42,11 +53,17 @@ const GameField: React.FC<Props> = ({plant}) => {
                 // Render different elements based on cell content
                 let cellContent;
                 if (cells[i][j]?.name === 'corn') {
-                    cellContent = <div className="corn" key={`${i}-${j}`} onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🌽</div>;
+                    cellContent = <div className="corn" key={`${i}-${j}`}
+                                       onClick={() => deletePlantInGardenBeds(i, j)}
+                                       onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🌽</div>;
                 } else if (cells[i][j]?.name === 'paper') {
-                    cellContent = <div className="paper" key={`${i}-${j}`} onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🫑</div>;
+                    cellContent = <div className="paper" key={`${i}-${j}`}
+                                       onClick={() => deletePlantInGardenBeds(i, j)}
+                                       onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🫑</div>;
                 } else if (cells[i][j]?.name === 'carrot') {
-                    cellContent = <div className="carrot" key={`${i}-${j}`} onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🥕</div>;
+                    cellContent = <div className="carrot" key={`${i}-${j}`}
+                                       onClick={() => deletePlantInGardenBeds(i, j)}
+                                       onMouseOver={(e) => handleMouseOver(e, cells[i][j])}>🥕</div>;
                 } else {
                     cellContent = (
                         <div className="empty-cell" key={`${i}-${j}`}
