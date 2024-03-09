@@ -4,12 +4,12 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/catcoin/",
+  base: "/happy-farmer/",
   server: {
     port: 443,
     host: "0.0.0.0",
     hmr: {
-      host: 'catcoin.local',
+      host: 'HappyFarm.local',
       port: 443,
     },
   }
