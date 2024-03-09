@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import FloatingButton from './FloatingButton';
 import GameField from "./GameField";
+import {Plant} from "./Plants";
 
 const GlobalWindow = () => {
     Telegram.WebApp.ready()
-    const [selectedElement, setSelectedElement] = useState<string>('');
+    const [selectedElement, setSelectedElement] = useState<Plant>({name: '', dateTime: new Date()});
 
-    const handleElementSelection = (element: string) => {
-        setSelectedElement(element);
-        console.log(`Selected element: ${element}`);
+    const handleElementSelection = (plant: Plant) => {
+        setSelectedElement(plant);
     };
 
     return (
@@ -21,7 +21,7 @@ const GlobalWindow = () => {
             <FloatingButton
                 handleElementSelection={handleElementSelection}
             />
-            <GameField selectedElement={selectedElement}/>
+            <GameField plant={selectedElement}/>
         </div>
     );
 };
