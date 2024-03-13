@@ -1,9 +1,12 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import './GameField.css';
 import {Plant} from './Plant/Plants';
-import {createPlant, deletePlants, getDepot, getPlants, nextPlantStage, plantHarvest} from './API/PlantAPI';
+import {createPlant, getDepot, getPlants} from './API/PlantAPI';
 import {Account} from "./Plant/Account";
 import AccountComponent from "./AccountComponent";
+import {Action} from "./Actions/Action";
+import {MyContext} from "./contexts/AppContext";
+import {DoNothing} from "./Actions/DoNothing";
 
 interface Props {
     plant: Plant | undefined;
@@ -15,6 +18,7 @@ interface Props {
 const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
     const rows = 10;
     const cols = 10;
+    const {action, setAction} = useContext(MyContext)
 
     const initialCells: (Plant | null)[][] = Array.from({length: rows}, () =>
         Array.from({length: cols}, () => null)
@@ -62,7 +66,7 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
 
     const placeIntoGardenBeds = useCallback(
         (row: number, col: number, plant: Plant | undefined) => {
-            if (!digUp && !getWater && plant) {
+            if (plant) {
                 let plantObject = {...plant, dateTime: new Date(), positionCol: col, positionRow: row};
                 createPlant(plantObject).then(() =>
                     getPlants().then((res) => {
@@ -71,34 +75,16 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
                 );
             }
         },
-        [digUp]
+        []
     );
 
-    const plantAction = useCallback(
-        (plant: Plant | null) => {
-            if (digUp && !getWater) {
-                deletePlants(plant).then((res) => {
-                    setCells(updateCells(res));
-                });
-            }
-            if (getWater && !digUp && plant && plant?.stageOfGrowing < 1) {
-                nextPlantStage(plant).then(() =>
-                    getPlants().then((res) => {
-                        setCells(updateCells(res));
-                    })
-                );
-            }
-            if (!getWater && !digUp && plant && plant?.isGrow === true) {
-                plantHarvest(plant).then((res) => {
-                        setAccount(res)
-                        getPlants().then((res) => {
-                            setCells(updateCells(res));
-                        })
-                    }
-                );
+    const plantAction = useCallback(async (plant: Plant | null, action: Action) => {
+            if (plant) {
+                const res = await action.doAction(plant)
+                setCells(updateCells(res));
             }
         },
-        [digUp, getWater, harvest]
+        [setCells]
     );
 
     const handleMouseOver = useCallback((event: React.MouseEvent<HTMLDivElement>, plant: Plant | null) => {
@@ -132,7 +118,7 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
                         <div
                             className="corn"
                             key={`${i}-${j}`}
-                            onClick={() => plantAction(cells[i][j])}
+                            onClick={() => plantAction(cells[i][j], action)}
                             onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
                         >
                             {cells[i][j]?.isGrow ? '🌽' : '🌱'}
@@ -145,7 +131,7 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
                         <div
                             className="pepper"
                             key={`${i}-${j}`}
-                            onClick={() => plantAction(cells[i][j])}
+                            onClick={() => plantAction(cells[i][j], action)}
                             onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
                         >
                             {cells[i][j]?.isGrow ? '🫑' : '🌱'}
@@ -156,7 +142,7 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
                         <div
                             className="carrot"
                             key={`${i}-${j}`}
-                            onClick={() => plantAction(cells[i][j])}
+                            onClick={() => plantAction(cells[i][j], action)}
                             onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
                         >
                             {cells[i][j]?.isGrow ? '🥕' : '🌱'}
@@ -167,7 +153,11 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
                         <div
                             className="empty-cell"
                             key={`${i}-${j}`}
-                            onClick={() => placeIntoGardenBeds(i, j, plant)}
+                            onClick={() => {
+                                if (action instanceof DoNothing) {
+                                    placeIntoGardenBeds(i, j, plant)
+                                }
+                            }}
                         >
                             {/* Add some content to the empty cells */}
                             &nbsp;

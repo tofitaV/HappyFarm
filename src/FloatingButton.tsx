@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './FloatingButton.css';
 import {initCarrot} from "./Plant/Type/Carrot";
 import {Plant} from "./Plant/Plants";
 import {initCorn} from "./Plant/Type/Corn";
 import {initPepper} from "./Plant/Type/Pepper";
+import {MyContext} from "./contexts/AppContext";
+import {DoNothing} from "./Actions/DoNothing";
+import {DigUpAction} from "./Actions/DigUpAction";
+import {HarvestAction} from "./Actions/HarvestAction";
+import {ToWaterPlantAction} from "./Actions/ToWaterPlantAction";
 
 interface Props {
-    handleElementSelection: (plantType: Plant | undefined) => void;
+    handleElementSelection: (plantType: Plant) => void;
     digUp: () => boolean;
     getWater: () => boolean;
     harvest: () => boolean;
@@ -22,31 +27,39 @@ const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWate
     const [pepperPressed, setPepperPressed] = useState(false);
     const [carrotPressed, setCarrotPressed] = useState(false);
 
+    const { action, setAction } = useContext(MyContext)
+
     const toggleWater = () => {
         setWaterPressed(!waterPressed);
+        setAction(new ToWaterPlantAction())
         getWater();
     };
 
     const toggleDigUp = () => {
         setDigUpPressed(!digUpPressed);
+        setAction(new DigUpAction())
         digUp();
     };
 
     const toggleHarvest = () => {
         setHarvestPressed(!harvestPressed);
+        setAction(new HarvestAction())
         harvest();
     };
 
     const toggleCorn = () => {
         setCornPressed(!cornPressed);
+        setAction(new DoNothing())
     };
 
     const toggleCarrot = () => {
         setCarrotPressed(!carrotPressed);
+        setAction(new DoNothing())
     };
 
     const togglePepper = () => {
         setPepperPressed(!pepperPressed);
+        setAction(new DoNothing())
     };
 
     const toggleSecondRow = () => {
@@ -67,19 +80,19 @@ const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWate
                 <div style={{marginTop: '1px'}}>
                     <button onClick={() => {
                         toggleCorn()
-                        !cornPressed ? handleElementSelection(initCorn()) : handleElementSelection(undefined)
+                        !cornPressed ? handleElementSelection(initCorn()) : ''
                     }} className={cornPressed ? 'active' : ''}>
                         Corn 🌽
                     </button>
                     <button onClick={() => {
                         togglePepper()
-                        !pepperPressed ? handleElementSelection(initPepper()) : handleElementSelection(undefined)
+                        !pepperPressed ? handleElementSelection(initPepper()) : ''
                     }} className={pepperPressed ? 'active' : ''}>
                         Pepper 🫑
                     </button>
                     <button onClick={() => {
                         toggleCarrot()
-                        !carrotPressed ? handleElementSelection(initCarrot()) : handleElementSelection(undefined)
+                        !carrotPressed ? handleElementSelection(initCarrot()) : ''
                     }} className={carrotPressed ? 'active' : ''}>
                         Carrot 🥕
                     </button>

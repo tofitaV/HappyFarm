@@ -24,6 +24,7 @@ export const nextPlantStage = async (plant: Plant | null) => {
         if (response.status !== 200) {
             throw new Error('Failed to fetch data');
         }
+        return await response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
     }
