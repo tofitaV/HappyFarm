@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import FloatingButton from './FloatingButton';
 import GameField from "./GameField";
-import {Plant} from "./Plants";
+import {Plant} from "./Plant/Plants";
 
 const GlobalWindow = () => {
-    Telegram.WebApp.ready()
-    const [selectedElement, setSelectedElement] = useState<Plant>({name: '', dateTime: new Date()});
+    const [selectedElement, setSelectedElement] = useState<Plant>();
     const [digUp, setDigUp] = useState(false);
+    const [getWater, setWater] = useState(false);
+    const [harvest, setHarvest] = useState(false);
 
     const handleElementSelection = (plant: Plant) => {
         setSelectedElement(plant);
@@ -17,9 +18,19 @@ const GlobalWindow = () => {
         return digUp;
     };
 
+    const toggleGetWater = () => {
+        setWater(!getWater);
+        return getWater;
+    };
+
+    const toggleHarvest = () => {
+        setHarvest(!harvest);
+        return harvest;
+    };
+
     return (
-        <div style={{
-            display:"flex",
+        <div className='global-window' style={{
+            display: "flex",
             justifyContent: "center",
             alignItems: "center",
             height: '100vh'
@@ -27,8 +38,10 @@ const GlobalWindow = () => {
             <FloatingButton
                 handleElementSelection={handleElementSelection}
                 digUp={toggleDigUp}
+                getWater={toggleGetWater}
+                harvest={toggleHarvest}
             />
-            <GameField plant={selectedElement} digUp={digUp}/>
+            <GameField plant={selectedElement} digUp={digUp} getWater={getWater} harvest={harvest}/>
         </div>
     );
 };

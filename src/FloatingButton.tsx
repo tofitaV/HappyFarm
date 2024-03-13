@@ -1,47 +1,104 @@
 import React, {useState} from 'react';
-import {Plant} from "./Plants";
 import './FloatingButton.css';
+import {initCarrot} from "./Plant/Type/Carrot";
+import {Plant} from "./Plant/Plants";
+import {initCorn} from "./Plant/Type/Corn";
+import {initPepper} from "./Plant/Type/Pepper";
 
 interface Props {
-    handleElementSelection: (plant: Plant) => void;
+    handleElementSelection: (plantType: Plant | undefined) => void;
     digUp: () => boolean;
+    getWater: () => boolean;
+    harvest: () => boolean;
 }
 
-const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp}) => {
+const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWater, harvest}) => {
     const [showSecondRow, setShowSecondRow] = useState(false);
+    const [showPlantStoreRow, setPlantStoreRow] = useState(false);
+    const [waterPressed, setWaterPressed] = useState(false);
+    const [digUpPressed, setDigUpPressed] = useState(false);
+    const [harvestPressed, setHarvestPressed] = useState(false);
+    const [cornPressed, setCornPressed] = useState(false);
+    const [pepperPressed, setPepperPressed] = useState(false);
+    const [carrotPressed, setCarrotPressed] = useState(false);
 
+    const toggleWater = () => {
+        setWaterPressed(!waterPressed);
+        getWater();
+    };
+
+    const toggleDigUp = () => {
+        setDigUpPressed(!digUpPressed);
+        digUp();
+    };
+
+    const toggleHarvest = () => {
+        setHarvestPressed(!harvestPressed);
+        harvest();
+    };
+
+    const toggleCorn = () => {
+        setCornPressed(!cornPressed);
+    };
+
+    const toggleCarrot = () => {
+        setCarrotPressed(!carrotPressed);
+    };
+
+    const togglePepper = () => {
+        setPepperPressed(!pepperPressed);
+    };
 
     const toggleSecondRow = () => {
         setShowSecondRow(!showSecondRow);
     };
-
+    const togglePlantStoreRow = () => {
+        setPlantStoreRow(!showPlantStoreRow);
+    };
 
 
     return (
         <div className="action-buttons">
-            <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>
-                Corn 🌽
+            <button onClick={togglePlantStoreRow}>
+                {showPlantStoreRow ? 'Hide plants' : 'Show plants'}
             </button>
-            <button onClick={() => handleElementSelection({name: 'paper', dateTime: new Date()})}>
-                Paper 🫑
-            </button>
-            <button onClick={() => handleElementSelection({name: 'carrot', dateTime: new Date()})}>
-                Carrot 🥕
-            </button>
+            {/* Second row of buttons */}
+            {showPlantStoreRow && (
+                <div style={{marginTop: '1px'}}>
+                    <button onClick={() => {
+                        toggleCorn()
+                        !cornPressed ? handleElementSelection(initCorn()) : handleElementSelection(undefined)
+                    }} className={cornPressed ? 'active' : ''}>
+                        Corn 🌽
+                    </button>
+                    <button onClick={() => {
+                        togglePepper()
+                        !pepperPressed ? handleElementSelection(initPepper()) : handleElementSelection(undefined)
+                    }} className={pepperPressed ? 'active' : ''}>
+                        Pepper 🫑
+                    </button>
+                    <button onClick={() => {
+                        toggleCarrot()
+                        !carrotPressed ? handleElementSelection(initCarrot()) : handleElementSelection(undefined)
+                    }} className={carrotPressed ? 'active' : ''}>
+                        Carrot 🥕
+                    </button>
+                </div>
+            )}
             <button onClick={toggleSecondRow}>
                 {showSecondRow ? 'Hide Action' : 'Show Action'}
             </button>
             {/* Second row of buttons */}
             {showSecondRow && (
                 <div style={{marginTop: '1px'}}>
-                    <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>
+                    <button onClick={toggleWater} className={waterPressed ? 'active' : ''}>
                         Полить
                     </button>
-                    <button onClick={digUp}>
+                    <button onClick={toggleDigUp} className={digUpPressed ? 'active' : ''}>
                         Выкопать
                     </button>
-                    <button onClick={() => handleElementSelection({name: 'corn', dateTime: new Date()})}>
-                        Что-то ещё
+                    <button onClick={toggleHarvest} className={harvestPressed ? 'active' : ''}>
+                        Собрать урожай
                     </button>
                 </div>
             )}

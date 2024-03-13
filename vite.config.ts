@@ -8,9 +8,5 @@ export default defineConfig({
   server: {
     port: 443,
     host: "0.0.0.0",
-    hmr: {
-      host: 'happyfarmer.local',
-      port: 443,
-    },
   }
 })
