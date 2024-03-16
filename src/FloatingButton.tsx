@@ -1,66 +1,24 @@
 import React, {useContext, useState} from 'react';
 import './FloatingButton.css';
 import {initCarrot} from "./Plant/Type/Carrot";
-import {Plant} from "./Plant/Plants";
-import {initCorn} from "./Plant/Type/Corn";
 import {initPepper} from "./Plant/Type/Pepper";
 import {MyContext} from "./contexts/AppContext";
-import {DoNothing} from "./Actions/DoNothing";
 import {DigUpAction} from "./Actions/DigUpAction";
 import {HarvestAction} from "./Actions/HarvestAction";
 import {ToWaterPlantAction} from "./Actions/ToWaterPlantAction";
+import {PlantEnum} from "./Plant/PlantEnum";
+import {initCorn} from "./Plant/Type/Corn";
+import {initNothing} from "./Plant/Type/Nothing";
+import {DoNothing} from "./Actions/DoNothing";
 
-interface Props {
-    handleElementSelection: (plantType: Plant) => void;
-    digUp: () => boolean;
-    getWater: () => boolean;
-    harvest: () => boolean;
-}
 
-const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWater, harvest}) => {
+const FloatingButton: React.FC = () => {
     const [showSecondRow, setShowSecondRow] = useState(false);
     const [showPlantStoreRow, setPlantStoreRow] = useState(false);
-    const [waterPressed, setWaterPressed] = useState(false);
-    const [digUpPressed, setDigUpPressed] = useState(false);
-    const [harvestPressed, setHarvestPressed] = useState(false);
-    const [cornPressed, setCornPressed] = useState(false);
-    const [pepperPressed, setPepperPressed] = useState(false);
-    const [carrotPressed, setCarrotPressed] = useState(false);
 
-    const { action, setAction } = useContext(MyContext)
+    const {action, setAction} = useContext(MyContext)
+    const {plant, setPlant} = useContext(MyContext)
 
-    const toggleWater = () => {
-        setWaterPressed(!waterPressed);
-        setAction(new ToWaterPlantAction())
-        getWater();
-    };
-
-    const toggleDigUp = () => {
-        setDigUpPressed(!digUpPressed);
-        setAction(new DigUpAction())
-        digUp();
-    };
-
-    const toggleHarvest = () => {
-        setHarvestPressed(!harvestPressed);
-        setAction(new HarvestAction())
-        harvest();
-    };
-
-    const toggleCorn = () => {
-        setCornPressed(!cornPressed);
-        setAction(new DoNothing())
-    };
-
-    const toggleCarrot = () => {
-        setCarrotPressed(!carrotPressed);
-        setAction(new DoNothing())
-    };
-
-    const togglePepper = () => {
-        setPepperPressed(!pepperPressed);
-        setAction(new DoNothing())
-    };
 
     const toggleSecondRow = () => {
         setShowSecondRow(!showSecondRow);
@@ -79,21 +37,21 @@ const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWate
             {showPlantStoreRow && (
                 <div style={{marginTop: '1px'}}>
                     <button onClick={() => {
-                        toggleCorn()
-                        !cornPressed ? handleElementSelection(initCorn()) : ''
-                    }} className={cornPressed ? 'active' : ''}>
+                        setPlant(initCorn)
+                        setAction(new DoNothing())
+                    }} className={plant.plantType == PlantEnum.Corn ? 'active' : ''}>
                         Corn 🌽
                     </button>
                     <button onClick={() => {
-                        togglePepper()
-                        !pepperPressed ? handleElementSelection(initPepper()) : ''
-                    }} className={pepperPressed ? 'active' : ''}>
+                        setPlant(initPepper)
+                        setAction(new DoNothing())
+                    }} className={plant.plantType == PlantEnum.Pepper ? 'active' : ''}>
                         Pepper 🫑
                     </button>
                     <button onClick={() => {
-                        toggleCarrot()
-                        !carrotPressed ? handleElementSelection(initCarrot()) : ''
-                    }} className={carrotPressed ? 'active' : ''}>
+                        setPlant(initCarrot)
+                        setAction(new DoNothing())
+                    }} className={plant.plantType == PlantEnum.Carrot ? 'active' : ''}>
                         Carrot 🥕
                     </button>
                 </div>
@@ -104,17 +62,32 @@ const FloatingButton: React.FC<Props> = ({handleElementSelection, digUp, getWate
             {/* Second row of buttons */}
             {showSecondRow && (
                 <div style={{marginTop: '1px'}}>
-                    <button onClick={toggleWater} className={waterPressed ? 'active' : ''}>
+                    <button onClick={() => {
+                        setAction(new ToWaterPlantAction())
+                        setPlant(initNothing)
+                    }} className={action instanceof ToWaterPlantAction ? 'active' : ''}>
                         Полить
                     </button>
-                    <button onClick={toggleDigUp} className={digUpPressed ? 'active' : ''}>
+                    <button onClick={() => {
+                        setAction(new DigUpAction())
+                        setPlant(initNothing)
+                    }} className={action instanceof DigUpAction ? 'active' : ''}>
                         Выкопать
                     </button>
-                    <button onClick={toggleHarvest} className={harvestPressed ? 'active' : ''}>
+                    <button onClick={() => {
+                        setAction(new HarvestAction())
+                        setPlant(initNothing)
+                    }} className={action instanceof HarvestAction ? 'active' : ''}>
                         Собрать урожай
                     </button>
                 </div>
             )}
+            <button onClick={()=>{
+                setAction(new DoNothing())
+                setPlant(initNothing)
+            }}>
+               Cancel
+            </button>
         </div>
     );
 };

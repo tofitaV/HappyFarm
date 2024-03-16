@@ -10,7 +10,6 @@ export class ToWaterPlantAction implements Action {
                 return nextPlantStage(plant);
         } catch (error) {
             console.error("Error deleting plant:", error);
-            return null;
         }
     }
 }

@@ -2,30 +2,26 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import './GameField.css';
 import {Plant} from './Plant/Plants';
 import {createPlant, getDepot, getPlants} from './API/PlantAPI';
-import {Account} from "./Plant/Account";
 import AccountComponent from "./AccountComponent";
 import {Action} from "./Actions/Action";
 import {MyContext} from "./contexts/AppContext";
 import {DoNothing} from "./Actions/DoNothing";
+import {PlantEnum} from "./Plant/PlantEnum";
+import {HarvestAction} from "./Actions/HarvestAction";
 
-interface Props {
-    plant: Plant | undefined;
-    digUp: boolean;
-    getWater: boolean;
-    harvest: boolean;
-}
 
-const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
+const GameField: React.FC = () => {
     const rows = 10;
     const cols = 10;
     const {action, setAction} = useContext(MyContext)
+    const {plant, setPlant} = useContext(MyContext)
+    const {account, setAccount} = useContext(MyContext)
 
     const initialCells: (Plant | null)[][] = Array.from({length: rows}, () =>
         Array.from({length: cols}, () => null)
     );
 
     const [cells, setCells] = useState<(Plant | null)[][]>(initialCells);
-    const [account, setAccount] = useState<Account>();
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -66,7 +62,7 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
 
     const placeIntoGardenBeds = useCallback(
         (row: number, col: number, plant: Plant | undefined) => {
-            if (plant) {
+            if (plant && plant?.plantType != PlantEnum.Nothing) {
                 let plantObject = {...plant, dateTime: new Date(), positionCol: col, positionRow: row};
                 createPlant(plantObject).then(() =>
                     getPlants().then((res) => {
@@ -82,6 +78,11 @@ const GameField: React.FC<Props> = ({plant, digUp, getWater, harvest}) => {
             if (plant) {
                 const res = await action.doAction(plant)
                 setCells(updateCells(res));
+            }
+            if (action instanceof HarvestAction) {
+                getDepot().then((res) => {
+                    setAccount(res)
+                })
             }
         },
         [setCells]

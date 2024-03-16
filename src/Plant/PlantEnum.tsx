@@ -1,5 +1,6 @@
 export enum PlantEnum {
     Corn,
     Carrot,
-    Pepper
+    Pepper,
+    Nothing
 }
