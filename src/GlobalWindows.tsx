@@ -5,7 +5,7 @@ import "./GlobalWindow.css"; // Import the CSS file
 const GlobalWindow = () => {
     return (<div className='background-image'>
         <div className='field-wrapper'>
-            <div className='global-window background-image'>
+            <div className='global-window'>
                 <GameField/>
             </div>
         </div>
