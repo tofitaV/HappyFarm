@@ -6,5 +6,5 @@ export interface Carrot extends Plant {
 }
 
 export function initCarrot(): Carrot {
-    return {plantType: PlantEnum.Carrot, name: 'carrot', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 1, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
+    return {plantType: PlantEnum.Carrot, name: 'carrot', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 5, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
 }

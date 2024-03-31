@@ -1,19 +1,38 @@
+.field-wrapper {
+    display: flex;
+    justify-content: center; /* Align table to the center */
+}
+
 .game-field {
     display: grid;
     grid-template-columns: repeat(10, 30px); /* Adjust cell size as needed */
-    grid-template-rows: repeat(10, 30px); /* Adjust cell size as needed */
-    gap: 1px; /* Adjust gap between cells as needed */
+    grid-template-rows: repeat(8.5, 30px); /* Adjust cell size as needed */
+    /* Add border around the entire grid */
+    border: 5px groove saddlebrown;
+    max-width: calc(100vw - 10px); /* Calculate maximum width relative to viewport width */
+    margin: 10px;
+    background-repeat: no-repeat;
 }
+
 
 .cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    /* border: 1px solid whitesmoke; */
     font-size: 1.5em;
+    position: relative; /* Add this line */
+    z-index: 1; /* Add this line */
+    backdrop-filter: brightness(80%)
 }
 
 .empty-cell {
     width: 100%;
+    height: 100%;
     cursor: pointer;
+    background-image: url("assets/terrain.webp");
+    background-size: cover; /* or contain, depending on your preference */
+    background-repeat: no-repeat;
+    position: relative; /* Add this line */
+    z-index: 0; /* Add this line */
 }

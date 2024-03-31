@@ -1,5 +1,14 @@
 .account {
+    display: flex;
+    flex-direction: row;
     position: fixed;
-    top: 10%;
-    width: 100%;
+    top: 1%;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    padding: 0 10px; /* Add padding to create space between child elements and edges */
+}
+
+.account > div {
+    font-size: x-large; /* Increase font size */
 }

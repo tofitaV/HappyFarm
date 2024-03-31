@@ -6,5 +6,5 @@ export interface Corn extends Plant {
 }
 
 export function initCorn(): Corn {
-    return {plantType: PlantEnum.Corn, name: 'corn', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 1, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
+    return {plantType: PlantEnum.Corn, name: 'corn', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 60, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
 }

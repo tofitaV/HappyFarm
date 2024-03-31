@@ -6,5 +6,5 @@ export interface Pepper extends Plant {
 }
 
 export function initPepper(): Pepper {
-    return {plantType: PlantEnum.Pepper, name: 'pepper', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 2, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
+    return {plantType: PlantEnum.Pepper, name: 'pepper', dateTime: new Date(), positionCol: -1, positionRow: -1, timeToGrow: 120, stageOfGrowing: 0, actualTimeToGrow: new Date(), isGrow: false}
 }
