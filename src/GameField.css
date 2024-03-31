@@ -23,7 +23,7 @@
     font-size: 1.5em;
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
-    backdrop-filter: brightness(80%)
+    backdrop-filter: brightness(80%);
 }
 
 .empty-cell {
@@ -32,6 +32,7 @@
     cursor: pointer;
     background-image: url("assets/terrain.webp");
     background-repeat: no-repeat;
+    background-size: cover; /* Ensure the entire image fits within the element */
     position: relative; /* Add this line */
     z-index: 0; /* Add this line */
 }
