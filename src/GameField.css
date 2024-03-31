@@ -31,7 +31,6 @@
     height: 100%;
     cursor: pointer;
     background-image: url("assets/terrain.webp");
-    background-size: cover; /* or contain, depending on your preference */
     background-repeat: no-repeat;
     position: relative; /* Add this line */
     z-index: 0; /* Add this line */
