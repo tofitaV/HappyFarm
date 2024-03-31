@@ -30,11 +30,11 @@ const GameField: React.FC = () => {
                     if (cell?.isGrow === true || cell === null) {
                         return;
                     }
-                    if (new Date(cell?.actualTimeToGrow).getTime() - new Date().getTime() <= 0) {
+                    /*if (new Date(cell?.actualTimeToGrow).getTime() - new Date().getTime() <= 0) { //TODO ЗАЙВИЙ ТРІГЕТ ГЕТ ЗАПИТУ ПІСЛЯ ПОЛИВКИ
                         getPlants().then((res) => {
                             setCells(updateCells(res));
                         });
-                    }
+                    }*/
                 });
             });
         }, 1000);
@@ -77,6 +77,7 @@ const GameField: React.FC = () => {
     const plantAction = useCallback(async (plant: Plant | null, action: Action) => {
             if (plant) {
                 const res = await action.doAction(plant)
+                console.log(res)
                 setCells(updateCells(res));
             }
             if (action instanceof HarvestAction) {

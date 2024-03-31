@@ -1,13 +1,14 @@
 import {Action} from "./Action";
 import {Plant} from "../Plant/Plants";
-import {nextPlantStage} from "../API/PlantAPI";
+import {getPlants, nextPlantStage} from "../API/PlantAPI";
 
 export class ToWaterPlantAction implements Action {
 
-    doAction(plant: Plant) {
+    async doAction(plant: Plant) {
         try {
             if (plant?.stageOfGrowing < 1)
-                return nextPlantStage(plant);
+                await nextPlantStage(plant);
+                return await getPlants();
         } catch (error) {
             console.error("Error deleting plant:", error);
         }
