@@ -1,7 +1,7 @@
 import {PlantEnum} from "./PlantEnum";
 
 export interface Plant {
-    plantType: PlantEnum
+    plantType: PlantEnum;
     name: string;
     dateTime: Date | null;
     positionCol: number;

@@ -1,5 +1,6 @@
 import {Plant} from "../Plant/Plants";
 import axios, {AxiosHeaders} from 'axios';
+import {FairModel} from "../Models/FairModel";
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -69,6 +70,18 @@ export const plantHarvest = async (plant: Plant | null) => {
 export const getDepot = async () => {
     try {
         const response = await apiService.get('/depot');
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+export const sellPlants = async (fairModel: FairModel) => {
+    try {
+        const response = await apiService.post('/fair', fairModel);
         if (response.status !== 200) {
             throw new Error('Failed to fetch data');
         }
