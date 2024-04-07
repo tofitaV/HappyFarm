@@ -6,9 +6,11 @@
     left: 0;
     right: 0;
     justify-content: space-between;
-    padding: 0 10px; /* Add padding to create space between child elements and edges */
+    padding: 0 10px;
+    align-items: center;
+
 }
 
 .account > div {
-    font-size: x-large; /* Increase font size */
+    font-size: x-large;
 }

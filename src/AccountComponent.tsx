@@ -1,6 +1,8 @@
 import './Account.css';
 import {Account} from "./Plant/Account";
-import React from "react";
+import React, {useState} from "react";
+import {FairModal} from "./Fair";
+import {League} from "./League/League";
 
 interface AccountProps {
     account: Account | undefined;
@@ -9,14 +11,12 @@ interface AccountProps {
 const AccountComponent: React.FC<AccountProps> = ({account}) => {
     return (
 
-            //<div className='warehouse'>
-                <div className='account'>
-                    <div>🌽: {account?.cornCount}</div>
-                    <div>🥕: {account?.carrotCount}</div>
-                    <div>🫑: {account?.pepperCount}</div>
-                    <div>🪙: {account?.coins}</div>
-                </div>
-            //</div>
+        <div className='account'>
+            <div>🌽: {account?.cornCount}</div>
+            <div>🥕: {account?.carrotCount}</div>
+            <div>🫑: {account?.pepperCount}</div>
+            <div>🪙: {account?.coins}</div>
+        </div>
 
     );
 }

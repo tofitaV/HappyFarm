@@ -12,12 +12,14 @@ import {initNothing} from './Plant/Type/Nothing';
 import {DoNothing} from './Actions/DoNothing';
 import {FairModal} from "./Fair";
 import {PlantStoreModal} from "./PlantStoreModal";
+import {League} from "./League/League";
 
 
 const FloatingButton: React.FC = () => {
     const [showSecondRow, setShowSecondRow] = useState(false);
     const [showPlantStoreModal, setShowPlantStoreModal] = useState(false);
     const [showFairModal, setShowFairModal] = useState(false);
+    const [showLeagueModal, setShowLeagueModal] = useState(false);
 
     const {action, setAction, plant, setPlant} = useContext(MyContext);
 
@@ -31,6 +33,10 @@ const FloatingButton: React.FC = () => {
 
     const toggleFair = () => {
         setShowFairModal(!showFairModal);
+    };
+
+    const toggleLeague = () => {
+        setShowLeagueModal(!showLeagueModal);
     };
 
     const handleSelectPlant = (plantType: PlantEnum) => {
@@ -76,6 +82,9 @@ const FloatingButton: React.FC = () => {
                 <button onClick={toggleFair}>
                     {'Fair'}
                 </button>
+                <button onClick={toggleLeague}>
+                    {'League'}
+                </button>
                 <button onClick={toggleSecondRow}>
                     {showSecondRow ? 'Action' : 'Action'}
                 </button>
@@ -95,6 +104,10 @@ const FloatingButton: React.FC = () => {
             <FairModal
                 show={showFairModal}
                 onClose={toggleFair}
+            />
+            <League
+                show={showLeagueModal}
+                onClose={toggleLeague}
             />
         </div>
     );

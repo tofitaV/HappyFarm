@@ -3,6 +3,7 @@ import {PlantEnum} from "./Plant/PlantEnum";
 import './Fair.css';
 import {sellPlants} from "./API/PlantAPI";
 import {MyContext} from "./contexts/AppContext";
+import AccountComponent from "./AccountComponent";
 
 interface FairModalProps {
     show: boolean;
@@ -32,6 +33,12 @@ export const FairModal: React.FC<FairModalProps> = ({show, onClose}) => {
         <div className={`modal ${show ? 'show' : ''}`}>
             <div className="modal-content">
                 <h2>Welcome to Your Fair!</h2>
+                <div className='fair-account'>
+                    <div>🌽: {account?.cornCount}</div>
+                    <div>🥕: {account?.carrotCount}</div>
+                    <div>🫑: {account?.pepperCount}</div>
+                    <div>🪙: {account?.coins}</div>
+                </div>
                 <div className="fair-button">
                     <span className="close" onClick={onClose}>&times;</span> {}
                     {plantOptions.map(option => (

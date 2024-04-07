@@ -1,0 +1,39 @@
+.league-image {
+    background-size: cover;
+    background-position: center;
+    width: 60%;
+}
+
+.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-table {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.player-table table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.player-table th,
+.player-table td {
+    padding: 3px;
+    text-align: left;
+}
+
+.position-column {
+    width: 15%;
+}
+
+.name-column {
+    width: 60%;
+}
+
+.coins-column {
+    width: 25%;
+}
