@@ -60,19 +60,19 @@ const FloatingButton: React.FC = () => {
                             setAction(new ToWaterPlantAction());
                             setPlant(initNothing);
                         }} className={action instanceof ToWaterPlantAction ? 'active' : ''}>
-                            Полить
+                            To water
                         </button>
                         <button onClick={() => {
                             setAction(new DigUpAction());
                             setPlant(initNothing);
                         }} className={action instanceof DigUpAction ? 'active' : ''}>
-                            Выкопать
+                            Dig up
                         </button>
                         <button onClick={() => {
                             setAction(new HarvestAction());
                             setPlant(initNothing);
                         }} className={action instanceof HarvestAction ? 'active' : ''}>
-                            Собрать урожай
+                            Harvest
                         </button>
                     </div>
                 )}

@@ -91,4 +91,16 @@ export const sellPlants = async (fairModel: FairModel) => {
     }
 };
 
+export const myLeague = async () => {
+    try {
+        const response = await apiService.get('/myLeague');
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
 

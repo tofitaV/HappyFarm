@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {leagues} from "./LeagueEnum";
 import './League.css';
+import {myLeague} from "../API/PlantAPI";
 
 interface LeagueModalProps {
     show: boolean;
@@ -8,6 +9,12 @@ interface LeagueModalProps {
 }
 
 export const League: React.FC<LeagueModalProps> = ({show, onClose}) => {
+
+    useEffect(() => {
+        myLeague().then(res => {
+            setCurrentLeagueIndex(res)
+        })
+    }, []);
 
     const [currentLeagueIndex, setCurrentLeagueIndex] = useState(0);
     const currentLeague = leagues[currentLeagueIndex];

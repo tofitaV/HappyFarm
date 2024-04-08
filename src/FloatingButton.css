@@ -10,7 +10,7 @@
 .action-buttons button {
     border: 2px solid transparent;
     border-radius: 5px;
-    padding: 8px 16px;
+    padding: 8px 8px;
     background-color: #000000;
     color: #ffffff;
     cursor: pointer;
