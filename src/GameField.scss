@@ -5,17 +5,20 @@
 
 .game-field {
     display: grid;
-    grid-template-columns: repeat(10, 30px); /* Adjust cell size as needed */
-    grid-template-rows: repeat(8.5, 30px); /* Adjust cell size as needed */
+    grid-template-columns: repeat(3, 100px); /* Adjust cell size as needed */
+    //grid-template-rows: repeat(3, 100px); /* Adjust cell size as needed */
     /* Add border around the entire grid */
     border: 5px groove saddlebrown;
     max-width: calc(100vw - 10px); /* Calculate maximum width relative to viewport width */
     margin: 10px;
     background-repeat: no-repeat;
+    backdrop-filter: brightness(80%);
 }
 
 
 .cell {
+    width: 100%;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,16 +26,35 @@
     font-size: 1.5em;
     position: relative; /* Add this line */
     z-index: 1; /* Add this line */
-    backdrop-filter: brightness(80%);
+    //backdrop-filter: brightness(80%);
 }
 
 .empty-cell {
     width: 100%;
-    height: 100%;
+    height: 100px;
     cursor: pointer;
     background-image: url("assets/terrain.webp");
     background-repeat: no-repeat;
     background-size: cover; /* Ensure the entire image fits within the element */
     position: relative; /* Add this line */
     z-index: 0; /* Add this line */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animation {
+    animation: bounce 2s ease infinite;
+}
+
+.plant {
+    background: inherit;
+    height: 60px;
+    width: 60px;
 }

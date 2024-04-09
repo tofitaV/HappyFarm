@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {leagues} from "./LeagueEnum";
-import './League.css';
+import {leagues} from "../enums/LeagueEnum";
+import './League.scss';
 import {myLeague} from "../API/PlantAPI";
 
 interface LeagueModalProps {

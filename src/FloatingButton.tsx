@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import './FloatingButton.css';
+import './FloatingButton.scss';
 import {initCarrot} from './Plant/Type/Carrot';
 import {initPepper} from './Plant/Type/Pepper';
 import {MyContext} from './contexts/AppContext';

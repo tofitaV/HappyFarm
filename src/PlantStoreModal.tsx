@@ -1,6 +1,7 @@
 import {PlantEnum} from "./Plant/PlantEnum";
 import React, {useState} from "react";
-import './PlantStoreModal.css';
+import './PlantStoreModal.scss';
+import {plants} from "./enums/PlantsEnum";
 
 interface PlantStoreModalProps {
     show: boolean;
@@ -10,11 +11,13 @@ interface PlantStoreModalProps {
 
 
 export const PlantStoreModal: React.FC<PlantStoreModalProps> = ({show, onClose, onSelectPlant}) => {
-    const [plantOptions] = useState([
-        {type: PlantEnum.Corn, label: 'Corn 🌽'},
-        {type: PlantEnum.Pepper, label: 'Pepper 🫑'},
-        {type: PlantEnum.Carrot, label: 'Carrot 🥕'}
-    ]);
+    // const [plantOptions] = useState([
+    //     {type: PlantEnum.Corn, label: 'Corn 🌽'},
+    //     {type: PlantEnum.Pepper, label: 'Pepper 🫑'},
+    //     {type: PlantEnum.Carrot, label: 'Carrot 🥕'}
+    // ]);
+
+    const filteredPlants = plants.filter((plant, index) => index !== plants.length - 1);
 
     return (
         <div className={`modal ${show ? 'show' : ''}`}>
@@ -22,9 +25,10 @@ export const PlantStoreModal: React.FC<PlantStoreModalProps> = ({show, onClose, 
                 <h2>Choose a Plant</h2>
                 <div className="plant-options">
                     <span className="close" onClick={onClose}>&times;</span> {}
-                    {plantOptions.map(option => (
-                        <button key={option.type} onClick={() => onSelectPlant(option.type)}>
-                            {option.label}
+                    {filteredPlants.map(option => (
+                        <button className="plant-options__btn" key={option.type} onClick={() => onSelectPlant(option.type)}>
+                            <img src={option.image} alt={option.name} style={{marginRight: '5px'}}/>
+                            {option.name}
                         </button>
                     ))}
                 </div>
