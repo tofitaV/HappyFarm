@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {PlantEnum} from "./Plant/PlantEnum";
-import './Fair.css';
+import './Fair.scss';
 import {sellPlants} from "./API/PlantAPI";
 import {MyContext} from "./contexts/AppContext";
 import AccountComponent from "./AccountComponent";

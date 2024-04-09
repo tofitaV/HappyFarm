@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import './GameField.css';
+import './GameField.scss';
 import {Plant} from './Plant/Plants';
 import {createPlant, getDepot, getPlants} from './API/PlantAPI';
 import AccountComponent from "./AccountComponent";
@@ -8,11 +8,12 @@ import {MyContext} from "./contexts/AppContext";
 import {DoNothing} from "./Actions/DoNothing";
 import {PlantEnum} from "./Plant/PlantEnum";
 import {HarvestAction} from "./Actions/HarvestAction";
+import {plants} from "./enums/PlantsEnum";
 
 
 const GameField: React.FC = () => {
-    const rows = 10;
-    const cols = 10;
+    const rows = 3;
+    const cols = 3;
     const {action, setAction} = useContext(MyContext)
     const {plant, setPlant} = useContext(MyContext)
     const {account, setAccount} = useContext(MyContext)
@@ -115,39 +116,21 @@ const GameField: React.FC = () => {
             const row = [];
             for (let j = 0; j < cols; j++) {
                 let cellContent;
-                if (cells[i][j]?.name === 'corn') {
-                    cellContent = (
-                        <div
-                            className="corn"
-                            key={`${i}-${j}`}
-                            onClick={() => plantAction(cells[i][j], action)}
-                            onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
-                        >
-                            {cells[i][j]?.isGrow ? '🌽' : '🌱'}
-                        </div>
-                    );
 
-                } else if (cells[i][j]?.name === 'pepper') {
-                    cellContent = (
+                const currentPlant = plants.find(plant => plant.type === cells[i][j]?.plantType);
 
-                        <div
-                            className="pepper"
-                            key={`${i}-${j}`}
-                            onClick={() => plantAction(cells[i][j], action)}
-                            onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
-                        >
-                            {cells[i][j]?.isGrow ? '🫑' : '🌱'}
-                        </div>
-                    );
-                } else if (cells[i][j]?.name === 'carrot') {
+                if (currentPlant) {
                     cellContent = (
                         <div
-                            className="carrot"
                             key={`${i}-${j}`}
                             onClick={() => plantAction(cells[i][j], action)}
                             onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
                         >
-                            {cells[i][j]?.isGrow ? '🥕' : '🌱'}
+                            {cells[i][j]?.isGrow  ? (
+                                <img className="plant animation" src={currentPlant.image} alt={currentPlant.name} />
+                            ) : (
+                                <img className="plant" src={plants[3].image} alt={plants[3].name} />
+                            )}
                         </div>
                     );
                 } else {

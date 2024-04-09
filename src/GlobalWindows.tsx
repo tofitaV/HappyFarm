@@ -1,6 +1,6 @@
 import FloatingButton from './FloatingButton';
 import GameField from "./GameField";
-import "./GlobalWindow.css"; // Import the CSS file
+import "./GlobalWindow.scss"; // Import the CSS file
 
 const GlobalWindow = () => {
     return (<div className='background-image'>
