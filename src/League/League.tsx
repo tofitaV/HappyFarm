@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {leagues} from "../enums/LeagueEnum";
 import './League.scss';
-import {myLeague} from "../API/PlantAPI";
+import {getLeagueLeaders, myLeague} from "../API/PlantAPI";
+import {LeagueUser} from "../Models/LeagueUser";
 
 interface LeagueModalProps {
     show: boolean;
@@ -10,63 +11,40 @@ interface LeagueModalProps {
 
 export const League: React.FC<LeagueModalProps> = ({show, onClose}) => {
 
+    let league: LeagueUser[] = [];
+
     useEffect(() => {
         myLeague().then(res => {
             setCurrentLeagueIndex(res)
         })
+        getLeagueLeaders({id: currentLeague.id}).then(res => league = res)
     }, []);
 
+
     const [currentLeagueIndex, setCurrentLeagueIndex] = useState(0);
+    const [leagueLeaders, setLeagueLeaders] = useState<LeagueUser[]>(league);
     const currentLeague = leagues[currentLeagueIndex];
     const [timePeriod, setTimePeriod] = useState('week');
 
     const handlePrevLeague = () => {
         setCurrentLeagueIndex((prevIndex) => (prevIndex === 0 ? leagues.length - 1 : prevIndex - 1));
+        getLeagueLeaders({id: currentLeague.id}).then(res => setLeagueLeaders(res))
     };
 
     const handleNextLeague = () => {
-        setCurrentLeagueIndex((prevIndex) => (prevIndex === leagues.length - 1 ? 0 : prevIndex + 1));
+        const nextIndex = currentLeagueIndex === leagues.length - 1 ? 0 : currentLeagueIndex + 1;
+        setCurrentLeagueIndex(nextIndex);
+        getLeagueLeaders({id: leagues[nextIndex].id}).then(res => setLeagueLeaders(res));
     };
+
 
     const handleTimePeriodChange = (period: string) => {
         setTimePeriod(period);
     };
 
-    //TEST DATA
-    const weeklyParticipants = [
-        {name: 'John Doe', coins: 100},
-        {name: 'Jane Smith', coins: 150},
-    ];
-
-    // Заглушка для участников лиги за месяц
-    const monthlyParticipants = [
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-        {name: 'Alice Johnson', coins: 200},
-        {name: 'Bob Brown', coins: 180},
-
-
-    ];
-
-    const participants = timePeriod === 'week' ? weeklyParticipants : monthlyParticipants;
-
+    const participants = timePeriod === 'week' ? leagueLeaders : leagueLeaders;
     return (
+
         <div className={`modal ${show ? 'show' : ''}`}>
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span> {}
@@ -103,8 +81,8 @@ export const League: React.FC<LeagueModalProps> = ({show, onClose}) => {
                             {participants.map((participant, index) => (
                                 <tr key={index}>
                                     <td className="position-column">{index + 1}</td>
-                                    <td className="name-column">{participant.name}</td>
-                                    <td className="coins-column">{participant.coins}</td>
+                                    <td className="name-column">{participant?.name}</td>
+                                    <td className="coins-column">{participant?.coins}</td>
                                 </tr>
                             ))}
                             </tbody>

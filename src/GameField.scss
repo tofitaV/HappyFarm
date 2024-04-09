@@ -1,15 +1,13 @@
 .field-wrapper {
     display: flex;
-    justify-content: center; /* Align table to the center */
+    justify-content: center;
 }
 
 .game-field {
     display: grid;
-    grid-template-columns: repeat(3, 100px); /* Adjust cell size as needed */
-    //grid-template-rows: repeat(3, 100px); /* Adjust cell size as needed */
-    /* Add border around the entire grid */
+    grid-template-columns: repeat(3, 100px);
     border: 5px groove saddlebrown;
-    max-width: calc(100vw - 10px); /* Calculate maximum width relative to viewport width */
+    max-width: calc(100vw - 10px);
     margin: 10px;
     background-repeat: no-repeat;
     backdrop-filter: brightness(80%);
@@ -22,11 +20,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid whitesmoke; */
     font-size: 1.5em;
-    position: relative; /* Add this line */
-    z-index: 1; /* Add this line */
-    //backdrop-filter: brightness(80%);
+    position: relative;
+    z-index: 1;
 }
 
 .empty-cell {

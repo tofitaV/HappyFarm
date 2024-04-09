@@ -1,6 +1,7 @@
 import {Plant} from "../Plant/Plants";
 import axios, {AxiosHeaders} from 'axios';
 import {FairModel} from "../Models/FairModel";
+import {LeagueModel} from "../Models/LeagueModel";
 
 const API_BASE_URL = 'http://localhost:8080';
 
@@ -94,6 +95,18 @@ export const sellPlants = async (fairModel: FairModel) => {
 export const myLeague = async () => {
     try {
         const response = await apiService.get('/myLeague');
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+export const getLeagueLeaders = async (league: LeagueModel) => {
+    try {
+        const response = await apiService.post('/leagueUsers', league);
         if (response.status !== 200) {
             throw new Error('Failed to fetch data');
         }
