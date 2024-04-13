@@ -166,6 +166,7 @@ const GameField: React.FC = () => {
             <div className="warehouse-wrapper">
                 <AccountComponent account={account}/>
             </div>
+
             <div className="game-field">
                 {renderGrid()}
             </div>
