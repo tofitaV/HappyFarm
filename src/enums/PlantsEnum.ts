@@ -4,25 +4,25 @@ export const plants = [
     {
         name: "Corn",
         id: 0,
-        image: "/assets/plants/corn.png",
+        image: new URL("/assets/plants/corn.png", import.meta.url).href,
         type: PlantEnum.Corn
     },
     {
         name: "Carrot",
         id: 1,
-        image: "/assets/plants/carrot.png",
+        image: new URL("/assets/plants/carrot.png", import.meta.url).href,
         type: PlantEnum.Carrot
     },
     {
         name: "Pepper",
         id: 2,
-        image: "/assets/plants/pepper.png",
+        image: new URL("/assets/plants/pepper.png", import.meta.url).href,
         type: PlantEnum.Pepper
     },
     {
         name: "Seed",
         id: 3,
-        image: "/assets/plants/seed.png",
+        image: new URL("/assets/plants/seed.png", import.meta.url).href,
         type: PlantEnum.Seed
     }
 ];

@@ -2,6 +2,6 @@ export const coins = [
     {
         id: 0,
         name: "coins",
-        image: "/assets/coin/coin.png"
+        image: new URL("/assets/coin/coin.png", import.meta.url).href
     }
 ];
