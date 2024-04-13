@@ -3,7 +3,7 @@ import axios, {AxiosHeaders} from 'axios';
 import {FairModel} from "../Models/FairModel";
 import {LeagueModel} from "../Models/LeagueModel";
 
-const API_BASE_URL = 'https://sharing-arriving-sparrow.ngrok-free.app';
+const API_BASE_URL = 'https://ab8f-185-146-122-198.ngrok-free.app';
 
 const apiService = axios.create({
     baseURL: API_BASE_URL,
