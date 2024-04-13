@@ -3,12 +3,13 @@ import axios, {AxiosHeaders} from 'axios';
 import {FairModel} from "../Models/FairModel";
 import {LeagueModel} from "../Models/LeagueModel";
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'https://sharing-arriving-sparrow.ngrok-free.app';
 
 const apiService = axios.create({
     baseURL: API_BASE_URL,
     headers: {
-        'Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone
+        'Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
+        'ngrok-skip-browser-warning':69420
     }
 });
 
