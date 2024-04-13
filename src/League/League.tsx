@@ -20,7 +20,6 @@ export const League: React.FC<LeagueModalProps> = ({show, onClose}) => {
         getLeagueLeaders({id: currentLeague.id}).then(res => league = res)
     }, []);
 
-
     const [currentLeagueIndex, setCurrentLeagueIndex] = useState(0);
     const [leagueLeaders, setLeagueLeaders] = useState<LeagueUser[]>(league);
     const currentLeague = leagues[currentLeagueIndex];
