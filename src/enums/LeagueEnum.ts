@@ -2,21 +2,21 @@ export const leagues = [
     {
         name: "Bronze",
         id: 0,
-        image: "/bronze.png"
+        image: "/assets/league/bronze.png"
     },
     {
         name: "Silver",
         id: 1,
-        image: "/silver.png"
+        image: "/assets/league/silver.png"
     },
     {
         name: "Gold",
         id: 2,
-        image: "/gold.png"
+        image: "/assets/league/gold.png"
     },
     {
         name: "Platinum",
         id: 3,
-        image: "/platinum.png"
+        image: "/assets/ague/platinum.png"
     }
 ];

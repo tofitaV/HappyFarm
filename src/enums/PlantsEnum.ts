@@ -4,25 +4,25 @@ export const plants = [
     {
         name: "Corn",
         id: 0,
-        image: "/corn.png",
+        image: "/assets/plants/corn.png",
         type: PlantEnum.Corn
     },
     {
         name: "Carrot",
         id: 1,
-        image: "/carrot.png",
+        image: "/assets/plants/carrot.png",
         type: PlantEnum.Carrot
     },
     {
         name: "Pepper",
         id: 2,
-        image: "/pepper.png",
+        image: "/assets/plants/pepper.png",
         type: PlantEnum.Pepper
     },
     {
         name: "Seed",
         id: 3,
-        image: "/seed.png",
+        image: "/assets/plants/seed.png",
         type: PlantEnum.Seed
     }
 ];
