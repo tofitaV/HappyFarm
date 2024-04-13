@@ -13,6 +13,7 @@ const apiService = axios.create({
     }
 });
 
+
 export const createPlant = async (plant: Plant | null) => {
     try {
         await apiService.post('/plant', plant);
