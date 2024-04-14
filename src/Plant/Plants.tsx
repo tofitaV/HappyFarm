@@ -10,4 +10,5 @@ export interface Plant {
     actualTimeToGrow: Date
     stageOfGrowing: number
     isGrow: boolean
+    userId: number
 }
