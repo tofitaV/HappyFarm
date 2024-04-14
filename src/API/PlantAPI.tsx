@@ -7,7 +7,7 @@ const API_BASE_URL = 'https://41cb-185-146-122-198.ngrok-free.app';
 
 
 const apiService = async () => {
-    const id = localStorage.getItem('id');
+    const id = sessionStorage.getItem('id');
     return axios.create({
         baseURL: API_BASE_URL,
         headers: {

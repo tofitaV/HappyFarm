@@ -17,6 +17,6 @@ export function initCorn(): Corn {
         stageOfGrowing: 0,
         actualTimeToGrow: new Date(),
         isGrow: false,
-        userId: toNumber(localStorage.getItem('id'))
+        userId: toNumber(sessionStorage.getItem('id'))
     }
 }

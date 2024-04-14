@@ -17,6 +17,6 @@ export function initPepper(): Pepper {
         stageOfGrowing: 0,
         actualTimeToGrow: new Date(),
         isGrow: false,
-        userId: toNumber(localStorage.getItem('id'))
+        userId: toNumber(sessionStorage.getItem('id'))
     }
 }

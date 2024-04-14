@@ -25,7 +25,7 @@ const GlobalWindow = () => {
             if (response.status !== 200) {
                 throw new Error('Failed to fetch data');
             }
-            localStorage.setItem('id', response.data);
+            sessionStorage.setItem('id', response.data);
             return response.data;
         } catch (error) {
             console.error('Error submitting plant data:', error);
@@ -34,7 +34,7 @@ const GlobalWindow = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const storedId = localStorage.getItem('id');
+            const storedId = sessionStorage.getItem('id');
             if (!storedId) {
                 try {
                     const id = await authorize(tg);
