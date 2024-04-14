@@ -13,6 +13,17 @@ const apiService = axios.create({
     }
 });
 
+export const authorize = async (tgData: any | null) => {
+    try {
+        const response = await apiService.post('/authorize', tgData);
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error submitting plant data:', error);
+    }
+};
 
 export const createPlant = async (plant: Plant | null) => {
     try {

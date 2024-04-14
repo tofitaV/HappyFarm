@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import './GameField.scss';
 import {Plant} from './Plant/Plants';
-import {createPlant, getDepot, getPlants} from './API/PlantAPI';
+import {authorize, createPlant, getDepot, getPlants} from './API/PlantAPI';
 import AccountComponent from "./AccountComponent";
 import {Action} from "./Actions/Action";
 import {MyContext} from "./contexts/AppContext";
@@ -17,6 +17,7 @@ const GameField: React.FC = () => {
     const {action, setAction} = useContext(MyContext)
     const {plant, setPlant} = useContext(MyContext)
     const {account, setAccount} = useContext(MyContext)
+    const {tg, setTG} = useContext(MyContext)
 
     const initialCells: (Plant | null)[][] = Array.from({length: rows}, () =>
         Array.from({length: cols}, () => null)
@@ -44,6 +45,8 @@ const GameField: React.FC = () => {
     }, [initialCells]);
 
     useEffect(() => {
+        console.log(tg)
+        authorize(tg).then(res => console.log(res))
         getPlants().then((res) => {
             setCells(updateCells(res));
         });
@@ -126,10 +129,10 @@ const GameField: React.FC = () => {
                             onClick={() => plantAction(cells[i][j], action)}
                             onMouseOver={(e) => handleMouseOver(e, cells[i][j])}
                         >
-                            {cells[i][j]?.isGrow  ? (
-                                <img className="plant animation" src={currentPlant.image} alt={currentPlant.name} />
+                            {cells[i][j]?.isGrow ? (
+                                <img className="plant animation" src={currentPlant.image} alt={currentPlant.name}/>
                             ) : (
-                                <img className="plant" src={plants[3].image} alt={plants[3].name} />
+                                <img className="plant" src={plants[3].image} alt={plants[3].name}/>
                             )}
                         </div>
                     );
