@@ -3,7 +3,7 @@ import axios from 'axios';
 import {FairModel} from "../Models/FairModel";
 import {LeagueModel} from "../Models/LeagueModel";
 
-const API_BASE_URL = 'https://41cb-185-146-122-198.ngrok-free.app';
+const API_BASE_URL = 'https://62f6-185-146-122-198.ngrok-free.app';
 
 
 const apiService = async () => {

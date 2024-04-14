@@ -1,79 +1,73 @@
-import React, {useEffect, useState} from "react";
-import {leagues} from "../enums/LeagueEnum";
+import React, { useEffect, useState } from "react";
+import { leagues } from "../enums/LeagueEnum";
 import './League.scss';
-import {getLeagueLeaders, myLeague} from "../API/PlantAPI";
-import {LeagueUser} from "../Models/LeagueUser";
+import { getLeagueLeaders, myLeague } from "../API/PlantAPI";
+import { LeagueUser } from "../Models/LeagueUser";
 
 interface LeagueModalProps {
     show: boolean;
     onClose: () => void;
 }
 
-export const League: React.FC<LeagueModalProps> = ({show, onClose}) => {
+export const League: React.FC<LeagueModalProps> = ({ show, onClose }) => {
 
-    let league: LeagueUser[] = [];
+    const [currentLeagueIndex, setCurrentLeagueIndex] = useState(0);
+    const [leagueLeaders, setLeagueLeaders] = useState<LeagueUser[]>([]);
+    const [timePeriod, setTimePeriod] = useState('week');
 
     useEffect(() => {
         myLeague().then(res => {
-            setCurrentLeagueIndex(res)
-        })
-        getLeagueLeaders({id: currentLeague.id}).then(res => league = res)
+            setCurrentLeagueIndex(res);
+        });
     }, []);
 
-    const [currentLeagueIndex, setCurrentLeagueIndex] = useState(0);
-    const [leagueLeaders, setLeagueLeaders] = useState<LeagueUser[]>(league);
+    useEffect(() => {
+        if (currentLeagueIndex !== null) {
+            getLeagueLeaders({ id: leagues[currentLeagueIndex]?.id }).then(res => setLeagueLeaders(res));
+        }
+    }, [currentLeagueIndex]);
+
     const currentLeague = leagues[currentLeagueIndex];
-    const [timePeriod, setTimePeriod] = useState('week');
 
     const handlePrevLeague = () => {
-        setCurrentLeagueIndex((prevIndex) => (prevIndex === 0 ? leagues.length - 1 : prevIndex - 1));
-        getLeagueLeaders({id: currentLeague.id}).then(res => setLeagueLeaders(res))
+        setCurrentLeagueIndex(prevIndex => (prevIndex === 0 ? 0 : prevIndex - 1));
     };
 
     const handleNextLeague = () => {
-        const nextIndex = currentLeagueIndex === leagues.length - 1 ? 0 : currentLeagueIndex + 1;
-        setCurrentLeagueIndex(nextIndex);
-        getLeagueLeaders({id: leagues[nextIndex].id}).then(res => setLeagueLeaders(res));
+        setCurrentLeagueIndex(prevIndex => (prevIndex === leagues.length - 1 ? prevIndex : prevIndex + 1));
     };
-
 
     const handleTimePeriodChange = (period: string) => {
         setTimePeriod(period);
     };
 
     const participants = timePeriod === 'week' ? leagueLeaders : leagueLeaders;
-    return (
 
+    return (
         <div className={`modal ${show ? 'show' : ''}`}>
             <div className="modal-content">
                 <span className="close" onClick={onClose}>&times;</span> {}
                 <div className="league-info">
-                    <h2>{currentLeague.name} League</h2>
+                    <h2>{currentLeague?.name} League</h2>
                 </div>
                 <div className="tabs">
                     <button onClick={handlePrevLeague}>{"<"}</button>
-                    <img className="league-image" src={currentLeague.image} alt={currentLeague.name}/>
+                    <img className="league-image" src={currentLeague?.image} alt={currentLeague?.name} />
                     <button onClick={handleNextLeague}>{">"}</button>
                 </div>
                 <div className="player-list">
-                    <h3>Players
-                        - {timePeriod === 'week' ? 'Weekly' : 'Monthly'}</h3> {/* Отображение периода времени */}
+                    <h3>Players - {timePeriod === 'week' ? 'Weekly' : 'Monthly'}</h3>
                     <div className="tabs">
-                        <button onClick={() => handleTimePeriodChange('week')}
-                                className={timePeriod === 'week' ? 'active' : ''}>Weekly
-                        </button>
-                        <button onClick={() => handleTimePeriodChange('month')}
-                                className={timePeriod === 'month' ? 'active' : ''}>Monthly
-                        </button>
+                        <button onClick={() => handleTimePeriodChange('week')} className={timePeriod === 'week' ? 'active' : ''}>Weekly</button>
+                        <button onClick={() => handleTimePeriodChange('month')} className={timePeriod === 'month' ? 'active' : ''}>Monthly</button>
                     </div>
                     <div className="player-table">
-                        {/* Вывод списка игроков в таблице */}
                         <table>
                             <thead>
                             <tr>
                                 <th className="position-column">Place</th>
-                                <th className="name-column"> Name</th>
-                                <th className="coins-column"> Coins</th>
+                                <th className="name-column">Name</th>
+                                <th className="coins-column">Coins</th>
                             </tr>
                             </thead>
                             <tbody>
