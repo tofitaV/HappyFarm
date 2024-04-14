@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import './GameField.scss';
 import {Plant} from './Plant/Plants';
-import {authorize, createPlant, getDepot, getPlants} from './API/PlantAPI';
+import {createPlant, getDepot, getPlants} from './API/PlantAPI';
 import AccountComponent from "./AccountComponent";
 import {Action} from "./Actions/Action";
 import {MyContext} from "./contexts/AppContext";
@@ -17,7 +17,6 @@ const GameField: React.FC = () => {
     const {action, setAction} = useContext(MyContext)
     const {plant, setPlant} = useContext(MyContext)
     const {account, setAccount} = useContext(MyContext)
-    const {tg, setTG} = useContext(MyContext)
 
     const initialCells: (Plant | null)[][] = Array.from({length: rows}, () =>
         Array.from({length: cols}, () => null)
@@ -45,8 +44,6 @@ const GameField: React.FC = () => {
     }, [initialCells]);
 
     useEffect(() => {
-        console.log(tg)
-        authorize(tg).then(res => console.log(res))
         getPlants().then((res) => {
             setCells(updateCells(res));
         });
