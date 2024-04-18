@@ -122,4 +122,28 @@ export const getLeagueLeaders = async (league: LeagueModel) => {
     }
 };
 
+export const getDailySpin = async () => {
+    try {
+        const response = await apiService().then(s => s.get('/spin'));
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+export const getDailySpinRewards = async () => {
+    try {
+        const response = await apiService().then(s => s.get('/getSpinWheelRewards'));
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
 

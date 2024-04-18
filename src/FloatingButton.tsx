@@ -13,6 +13,7 @@ import {DoNothing} from './Actions/DoNothing';
 import {FairModal} from "./Fair";
 import {PlantStoreModal} from "./PlantStoreModal";
 import {League} from "./League/League";
+import SpinWheel from "./DailyActivity/SpinWheel";
 
 
 const FloatingButton: React.FC = () => {
@@ -20,6 +21,7 @@ const FloatingButton: React.FC = () => {
     const [showPlantStoreModal, setShowPlantStoreModal] = useState(false);
     const [showFairModal, setShowFairModal] = useState(false);
     const [showLeagueModal, setShowLeagueModal] = useState(false);
+    const [showSpinWheelModal, setShowSpinWheelModal] = useState(false);
 
     const {action, setAction, plant, setPlant} = useContext(MyContext);
 
@@ -37,6 +39,9 @@ const FloatingButton: React.FC = () => {
 
     const toggleLeague = () => {
         setShowLeagueModal(!showLeagueModal);
+    };
+    const toggleSpinWheel = () => {
+        setShowSpinWheelModal(!showSpinWheelModal);
     };
 
     const handleSelectPlant = (plantType: PlantEnum) => {
@@ -86,6 +91,9 @@ const FloatingButton: React.FC = () => {
                 <button onClick={toggleLeague}>
                     {'League'}
                 </button>
+                <button onClick={toggleSpinWheel}>
+                    {'Spin Wheel'}
+                </button>
                 <button onClick={toggleSecondRow}>
                     {showSecondRow ? 'Action' : 'Action'}
                 </button>
@@ -109,6 +117,10 @@ const FloatingButton: React.FC = () => {
             <League
                 show={showLeagueModal}
                 onClose={toggleLeague}
+            />
+            <SpinWheel
+                show={showSpinWheelModal}
+                onClose={toggleSpinWheel}
             />
         </div>
     );

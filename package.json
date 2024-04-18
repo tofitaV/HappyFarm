@@ -13,6 +13,7 @@
     "axios": "^1.6.7",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-custom-roulette": "^1.4.1",
     "react-dom": "^18.2.0",
     "sass": "^1.74.1",
     "telegram-webapps": "^7.0.0"
@@ -23,6 +24,7 @@
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
     "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "react-custom-roulette": "^1.4.1"
   }
 }

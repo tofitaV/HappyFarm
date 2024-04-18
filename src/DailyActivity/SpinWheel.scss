@@ -1,0 +1,45 @@
+.spin-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.wheel {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 5px solid #000;
+  position: relative;
+  cursor: pointer;
+  transition: transform 10s ease-in-out;
+}
+
+.spin {
+  animation: spin-animation 10s linear;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 20px 10px;
+  border-color: transparent transparent #000 transparent;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
