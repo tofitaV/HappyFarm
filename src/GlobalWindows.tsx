@@ -12,7 +12,7 @@ const GlobalWindow = () => {
     const [loading, setLoading] = useState(true);
 
     const apiService = axios.create({
-        baseURL: "https://62f6-185-146-122-198.ngrok-free.app",
+        baseURL: "https://0e61-185-146-122-198.ngrok-free.app",
         headers: {
             'Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'ngrok-skip-browser-warning': 69420
