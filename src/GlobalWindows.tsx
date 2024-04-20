@@ -4,6 +4,7 @@ import "./GlobalWindow.scss";
 import axios from "axios";
 import {useContext, useEffect, useState} from "react";
 import {MyContext} from "./contexts/AppContext";
+import configData from "../config.json";
 
 const GlobalWindow = () => {
 
@@ -12,7 +13,7 @@ const GlobalWindow = () => {
     const [loading, setLoading] = useState(true);
 
     const apiService = axios.create({
-        baseURL: "https://0e61-185-146-122-198.ngrok-free.app",
+        baseURL: configData.API_ENDPOINT_URL,
         headers: {
             'Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'ngrok-skip-browser-warning': 69420

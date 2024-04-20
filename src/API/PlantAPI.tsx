@@ -2,14 +2,13 @@ import {Plant} from "../Plant/Plants";
 import axios from 'axios';
 import {FairModel} from "../Models/FairModel";
 import {LeagueModel} from "../Models/LeagueModel";
-
-const API_BASE_URL = 'https://0e61-185-146-122-198.ngrok-free.app';
+import configData from "../../config.json";
 
 
 const apiService = async () => {
     const id = sessionStorage.getItem('id');
     return axios.create({
-        baseURL: API_BASE_URL,
+        baseURL: configData.API_ENDPOINT_URL,
         headers: {
             'Time-Zone': Intl.DateTimeFormat().resolvedOptions().timeZone,
             'ngrok-skip-browser-warning': 69420,

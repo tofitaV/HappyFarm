@@ -3,5 +3,6 @@ export enum PlantEnum {
     Carrot,
     Pepper,
     Nothing,
-    Seed
+    Seed,
+    Coin
 }
