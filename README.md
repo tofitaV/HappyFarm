@@ -1,24 +1,3 @@
-AGRG: Awesome Github Readme Generator
-Generate Successfully
-
-
-Awesome Github Readme Generator
-Sign In
-
-Awesome Github Repository README.md Generator
-
-Star This Repository
-Fork This Repository
-
-Back To Edit
-
-Copy Markdown
-
-Download Markdown
-
-Download Backup
-
-Preview Markdown
 <div align='center'>
 
 <h1>Happy Farm</h1>
