@@ -36,7 +36,6 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
         })
     }
 
-
     useEffect(() => {
         getDailySpinRewards().then(res => {
             const wheelPrizes: WheelPrize[] = res;
@@ -46,36 +45,26 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
             }));
 
             newData = newData.map(item => {
-                if (item.option.includes('Coins')) {
-                    return {
-                        ...item,
-                        style: { backgroundColor: '#9d00ff' }
-                    };
-                }
-                if (item.option.includes('Corn')) {
-                    return {
-                        ...item,
-                        style: { backgroundColor: '#e7e013' }
-                    };
-                }
-                if (item.option.includes('Pepper')) {
-                    return {
-                        ...item,
-                        style: { backgroundColor: '#9bdb7a' }
-                    };
-                }
-                if (item.option.includes('Carrot')) {
-                    return {
-                        ...item,
-                        style: { backgroundColor: '#e18819' }
-                    };
-                }
+                item = applyStyle(item, 'Coins', '#9d00ff');
+                item = applyStyle(item, 'Corn', '#e7e013');
+                item = applyStyle(item, 'Pepper', '#9bdb7a');
+                item = applyStyle(item, 'Carrot', '#e18819');
                 return item;
             });
 
             setData(newData);
         })
     }, []);
+
+    const applyStyle = (item: any, searchString: string, color: string) => {
+        if (item.option.includes(searchString)) {
+            return {
+                ...item,
+                style: { backgroundColor: color }
+            };
+        }
+        return item;
+    };
 
     useEffect(() => {
         if (!mustSpin && prizeNumber !== 0) {

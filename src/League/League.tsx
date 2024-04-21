@@ -56,11 +56,6 @@ export const League: React.FC<LeagueModalProps> = ({ show, onClose }) => {
                     <button onClick={handleNextLeague}>{">"}</button>
                 </div>
                 <div className="player-list">
-                    <h3>Players - {timePeriod === 'week' ? 'Weekly' : 'Monthly'}</h3>
-                    <div className="tabs">
-                        <button onClick={() => handleTimePeriodChange('week')} className={timePeriod === 'week' ? 'active' : ''}>Weekly</button>
-                        <button onClick={() => handleTimePeriodChange('month')} className={timePeriod === 'month' ? 'active' : ''}>Monthly</button>
-                    </div>
                     <div className="player-table">
                         <table>
                             <thead>
