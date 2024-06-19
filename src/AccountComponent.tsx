@@ -7,12 +7,20 @@ import {plants} from "./enums/PlantsEnum";
 import {coins} from "./enums/CoinsEnam";
 import {WalletModal} from "./wallet/WalletModal";
 import ReactDOM from 'react-dom';
+import {TonConnectButton} from "@tonconnect/ui-react";
+import {AddressInfo} from "./wallet/AddressInfo";
+import {WalletInfo} from "./wallet/WalletInfo";
+import {SendTx} from "./wallet/SendTx";
+import {Settings} from "./wallet/Settings";
+import {BackendDemoApi} from "./wallet/BackendDemoApi";
+import {BackendTokenContext} from "./wallet/BackendTokenContext";
 
 interface AccountProps {
     account: Account | undefined;
 }
 
 const AccountComponent: React.FC<AccountProps> = ({account}) => {
+    const [token, setToken] = useState<string | null>(null);
     const filteredPlants = plants.filter((plant, index) => index !== plants.length - 1);
 
     const [showWalletModal, setShowWalletModal] = useState(false);
@@ -36,6 +44,9 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                         {account?.coins}
                     </div>
                 </div>
+                <BackendTokenContext.Provider value={{token, setToken}}>
+                    <TonConnectButton />
+                </BackendTokenContext.Provider>
                 <div className='account__wallet'>
                     <button className='wallet__button' onClick={toggleWallet}>
                         <FontAwesomeIcon icon={faWallet} style={{ color: "#74C0FC" }} />

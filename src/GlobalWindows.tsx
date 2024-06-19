@@ -7,7 +7,6 @@ import {MyContext} from "./contexts/AppContext";
 import configData from "../config.json";
 
 const GlobalWindow = () => {
-
     const {tg, setTG} = useContext(MyContext);
     const [data, setData] = useState("");
     const [loading, setLoading] = useState(true);
