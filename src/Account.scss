@@ -7,15 +7,26 @@
     right: 0;
     justify-content: space-between;
     padding: 0 10px;
-    align-items: center;
+    //align-items: center;
 
     &__plants {
        display: flex;
-        justify-content: center;
+        //justify-content: center;
         align-items: center;
     }
 }
 
 .account > div {
     font-size: x-large;
+}
+
+.wallet {
+    &__button {
+        background-color: #000000;
+    }
+
+    &__button__img {
+        fill: red;
+    }
+
 }

@@ -14,6 +14,7 @@ import {FairModal} from "./Fair";
 import {PlantStoreModal} from "./PlantStoreModal";
 import {League} from "./League/League";
 import SpinWheel from "./DailyActivity/SpinWheel";
+import {WalletModal} from "./wallet/WalletModal";
 
 
 const FloatingButton: React.FC = () => {
@@ -92,7 +93,7 @@ const FloatingButton: React.FC = () => {
                     {'League'}
                 </button>
                 <button onClick={toggleSpinWheel}>
-                    {'Spin Wheel'}
+                    {'Spin'}
                 </button>
                 <button onClick={toggleSecondRow}>
                     {showSecondRow ? 'Action' : 'Action'}
