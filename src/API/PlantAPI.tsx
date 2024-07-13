@@ -135,7 +135,7 @@ export const getDailySpin = async () => {
 
 export const getDailySpinRewards = async () => {
     try {
-        const response = await apiService().then(s => s.get('/getSpinWheelRewards'));
+        const response = await apiService().then(s => s.get('/rewards'));
         if (response.status !== 200) {
             throw new Error('Failed to fetch data');
         }

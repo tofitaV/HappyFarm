@@ -8,11 +8,6 @@ import {coins} from "./enums/CoinsEnam";
 import {WalletModal} from "./wallet/WalletModal";
 import ReactDOM from 'react-dom';
 import {TonConnectButton} from "@tonconnect/ui-react";
-import {AddressInfo} from "./wallet/AddressInfo";
-import {WalletInfo} from "./wallet/WalletInfo";
-import {SendTx} from "./wallet/SendTx";
-import {Settings} from "./wallet/Settings";
-import {BackendDemoApi} from "./wallet/BackendDemoApi";
 import {BackendTokenContext} from "./wallet/BackendTokenContext";
 
 interface AccountProps {
