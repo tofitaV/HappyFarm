@@ -40,21 +40,21 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                     </div>
                 </div>
                 <BackendTokenContext.Provider value={{token, setToken}}>
-                    <TonConnectButton />
+                    <TonConnectButton/>
+                    <div className='account__wallet'>
+                        <button className='wallet__button' onClick={toggleWallet}>
+                            <FontAwesomeIcon icon={faWallet} style={{color: "#74C0FC"}}/>
+                        </button>
+                    </div>
+                    {ReactDOM.createPortal(
+                        <WalletModal
+                            show={showWalletModal}
+                            onClose={toggleWallet}
+                        />,
+                        document.body
+                    )}
                 </BackendTokenContext.Provider>
-                <div className='account__wallet'>
-                    <button className='wallet__button' onClick={toggleWallet}>
-                        <FontAwesomeIcon icon={faWallet} style={{ color: "#74C0FC" }} />
-                    </button>
-                </div>
             </div>
-            {ReactDOM.createPortal(
-                <WalletModal
-                    show={showWalletModal}
-                    onClose={toggleWallet}
-                />,
-                document.body
-            )}
         </>
     );
 }

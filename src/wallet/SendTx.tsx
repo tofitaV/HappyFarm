@@ -31,15 +31,19 @@ export const SendTx = () => {
         } else {
             setTxInProgress(true)
             try {
-                await tonConnectUI.sendTransaction({
+                var res = await tonConnectUI.sendTransaction({
                     validUntil: Math.floor(Date.now() / 1000) + 360,
                     messages: [
                         {
                             amount: '1000000',
-                            address: '0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F'
+                            address: '0:07e85dfff3bbe1513595c74d06393373561628ff0bc981d21cae310c8645e095'
                         }
                     ]
                 });
+                //send boc to back-end and check the result
+                if(true){
+
+                }
             } catch (e) {
                 console.log(e);
             }
