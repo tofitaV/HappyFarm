@@ -4,7 +4,6 @@ import {AddressInfo} from "./AddressInfo";
 import {WalletInfo} from "./WalletInfo";
 import {SendTx} from "./SendTx";
 import {Settings} from "./Settings";
-import {BackendDemoApi} from "./BackendDemoApi";
 interface WalletModalProps {
     show: boolean;
     onClose: () => void;
@@ -29,7 +28,6 @@ export const WalletModal: React.FC<WalletModalProps> = ({show, onClose}) => {
                 </div>
                 <SendTx/>
                 <Settings/>
-                <BackendDemoApi/>
             </div>
         </div>
     );

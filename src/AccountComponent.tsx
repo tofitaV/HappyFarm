@@ -8,7 +8,6 @@ import {coins} from "./enums/CoinsEnam";
 import {WalletModal} from "./wallet/WalletModal";
 import ReactDOM from 'react-dom';
 import {TonConnectButton} from "@tonconnect/ui-react";
-import {BackendTokenContext} from "./wallet/BackendTokenContext";
 
 interface AccountProps {
     account: Account | undefined;
@@ -39,7 +38,6 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                         {account?.coins}
                     </div>
                 </div>
-                <BackendTokenContext.Provider value={{token, setToken}}>
                     <TonConnectButton/>
                     <div className='account__wallet'>
                         <button className='wallet__button' onClick={toggleWallet}>
@@ -53,7 +51,6 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                         />,
                         document.body
                     )}
-                </BackendTokenContext.Provider>
             </div>
         </>
     );
