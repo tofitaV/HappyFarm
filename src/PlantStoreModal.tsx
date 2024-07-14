@@ -5,6 +5,7 @@ import {plants} from "./enums/PlantsEnum";
 import {coins} from "./enums/CoinsEnam";
 import {useIsConnectionRestored, useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {MyContext} from "./contexts/AppContext";
+import { coinTransaction } from "./API/PlantAPI";
 
 interface PlantStoreModalProps {
     show: boolean;
@@ -54,7 +55,13 @@ export const PlantStoreModal: React.FC<PlantStoreModalProps> = ({show, onClose, 
                         }
                     ]
                 });
-                //send boc to back-end and check the result and add coins to account
+                
+                var result = await coinTransaction(res.boc);
+                if(result === 0){
+                    console.log("Transaction success you got your coins")
+                }else{
+                    console.log("Transaction unsuccessful..")
+                }
             } catch (e) {
                 console.log(e);
             }
