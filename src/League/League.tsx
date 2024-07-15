@@ -25,7 +25,7 @@ export const League: React.FC<LeagueModalProps> = ({ show, onClose }) => {
         if (currentLeagueIndex !== null) {
             getLeagueLeaders({ id: leagues[currentLeagueIndex]?.id }).then(res => setLeagueLeaders(res));
         }
-    }, [currentLeagueIndex]);
+    }, [show, currentLeagueIndex]);
 
     const currentLeague = leagues[currentLeagueIndex];
 
