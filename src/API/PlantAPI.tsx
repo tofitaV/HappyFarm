@@ -109,8 +109,6 @@ export const sellPlants = async (fairModel: FairModel) => {
     }
 };
 
-
-
 export const myLeague = async () => {
     try {
         const response = await apiService().then(s => s.get('/myLeague'));
@@ -126,6 +124,18 @@ export const myLeague = async () => {
 export const getLeagueLeaders = async (league: LeagueModel) => {
     try {
         const response = await apiService().then(s => s.post('/leagueUsers', league));
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+export const getMyFriends = async () => {
+    try {
+        const response = await apiService().then(s => s.get('/friends'));
         if (response.status !== 200) {
             throw new Error('Failed to fetch data');
         }

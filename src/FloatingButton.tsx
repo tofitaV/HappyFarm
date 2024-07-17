@@ -15,6 +15,7 @@ import {PlantStoreModal} from "./PlantStoreModal";
 import {League} from "./League/League";
 import SpinWheel from "./DailyActivity/SpinWheel";
 import {WalletModal} from "./wallet/WalletModal";
+import FriendsList from "./Friends/FriendsList";
 
 
 const FloatingButton: React.FC = () => {
@@ -22,7 +23,7 @@ const FloatingButton: React.FC = () => {
     const [showPlantStoreModal, setShowPlantStoreModal] = useState(false);
     const [showFairModal, setShowFairModal] = useState(false);
     const [showLeagueModal, setShowLeagueModal] = useState(false);
-    const [showSpinWheelModal, setShowSpinWheelModal] = useState(false);
+    const [showFriendsModal, setShowFriendsModal] = useState(false);
 
     const {action, setAction, plant, setPlant} = useContext(MyContext);
 
@@ -41,8 +42,8 @@ const FloatingButton: React.FC = () => {
     const toggleLeague = () => {
         setShowLeagueModal(!showLeagueModal);
     };
-    const toggleSpinWheel = () => {
-        setShowSpinWheelModal(!showSpinWheelModal);
+    const toggleFriendsList = () => {
+        setShowFriendsModal(!showFriendsModal);
     };
 
     const handleSelectPlant = (plantType: PlantEnum) => {
@@ -92,8 +93,8 @@ const FloatingButton: React.FC = () => {
                 <button onClick={toggleLeague}>
                     {'League'}
                 </button>
-                <button onClick={toggleSpinWheel}>
-                    {'Spin'}
+                <button onClick={toggleFriendsList}>
+                    {'Friends'}
                 </button>
                 <button onClick={toggleSecondRow}>
                     {showSecondRow ? 'Action' : 'Action'}
@@ -119,9 +120,9 @@ const FloatingButton: React.FC = () => {
                 show={showLeagueModal}
                 onClose={toggleLeague}
             />
-            <SpinWheel
-                show={showSpinWheelModal}
-                onClose={toggleSpinWheel}
+            <FriendsList
+                show={showFriendsModal}
+                onClose={toggleFriendsList}
             />
         </div>
     );
