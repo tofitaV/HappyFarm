@@ -68,7 +68,7 @@ const FloatingButton: React.FC = () => {
                             setAction(new ToWaterPlantAction());
                             setPlant(initNothing);
                         }} className={action instanceof ToWaterPlantAction ? 'active' : ''}>
-                            To water
+                            💧
                         </button>
                         <button onClick={() => {
                             setAction(new DigUpAction());
@@ -103,7 +103,7 @@ const FloatingButton: React.FC = () => {
                     setAction(new DoNothing());
                     setPlant(initNothing);
                 }}>
-                    Clear
+                    ❌
                 </button>
             </div>
             {/* Modal should be rendered here, outside the button wrapper */}

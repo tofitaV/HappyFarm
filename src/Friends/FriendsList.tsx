@@ -52,7 +52,7 @@ const FriendsList: React.FC<FriendsListModalProps> = ({show, onClose}) => {
                     </div>
                 </div>
                 <div className="invite-button">
-                    <div className="invite-link-preview">My invite link: https://t.me/crypto_plants_bot/plants?start={tg.initDataUnsafe.user?.id}</div>
+                    <div className="invite-link-preview">My invite link: https://t.me/crypto_plants_bot/plants?startapp={tg.initDataUnsafe.user?.id}</div>
                     <button onClick={handleCopyInviteLink}>
                         Get invite link
                     </button>
