@@ -10,6 +10,7 @@ const GlobalWindow = () => {
     const {tg, setTG} = useContext(MyContext);
     const [data, setData] = useState("");
     const [loading, setLoading] = useState(true);
+    const [authFailed, setAuthFailed] = useState(false);
 
     const apiService = axios.create({
         baseURL: configData.API_ENDPOINT_URL,
@@ -29,6 +30,7 @@ const GlobalWindow = () => {
             return response.data;
         } catch (error) {
             console.error('Error submitting plant data:', error);
+            setAuthFailed(true);
         }
     };
 
@@ -56,16 +58,20 @@ const GlobalWindow = () => {
         return <div className="loading-cat">Loading...</div>;
     }
 
+    if (authFailed) {
+        return <div className="auth-failed">Authorization Failed. Please try again.</div>;
+    }
+
     return (
         <div className='background-image'>
             <div className='field-wrapper'>
-                {data != "" && (
+                {data !== "" && (
                     <div className='global-window'>
                         <GameField/>
                     </div>
                 )}
             </div>
-            {data != "" && <FloatingButton/>}
+            {data !== "" && <FloatingButton/>}
         </div>
     );
 };
