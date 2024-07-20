@@ -49,14 +49,17 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #E6E6C4;
   cursor: pointer;
   transition: border-color 0.25s;
-  margin: 2px
+  margin: 2px;
+  color: black;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -91,30 +94,25 @@ img {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Show Modal */
 .modal.show {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Modal Content/Box */
 .modal-content {
   background: linear-gradient(to bottom, #7ccbd9, #84e3a6);
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  position: relative; /* Ensure the relative positioning for the close button */
-  /*background-image: url(src/assets/background.jpg);
-  background-size: cover;
-  background-position: top;*/
+  width: 80%;
+  position: relative;
   z-index: 1;
 }
 
 .close {
   color: #aaa;
-  position: absolute; /* Position relative to the modal content */
+  position: absolute;
   top: 10px;
   right: 10px;
   font-size: 28px;
@@ -129,7 +127,7 @@ img {
 }
 
 .modal-content h2 {
-  color: black; /* Set the color of the h2 text to black */
-  text-align: center; /* Center the text there */
+  color: black;
+  text-align: center;
 }
 

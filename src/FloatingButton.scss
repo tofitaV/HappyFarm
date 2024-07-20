@@ -1,25 +1,75 @@
-.action-buttons {
+.action-buttons-container {
     position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 100px;
     width: 100%;
-    text-align: center;;
+    display: flex;
+    justify-content: center;
 }
 
-.action-buttons button {
-    border: 2px solid transparent;
-    border-radius: 5px;
-    padding: 8px 8px;
-    background-color: #000000;
-    color: #ffffff;
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E6E6C4;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    color: #555;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    outline: none;
-    width: 100px;
+    border: 2px solid transparent;
+    background: none;
+    transition: color 0.3s, border-color 0.3s;
 }
 
-.action-buttons button.active {
-    border-color: red;
+.action-button.active {
+    border-color: #8FBC8F;
+    color: #8FBC8F;
 }
 
+.navigation-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #E6E6C4;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navigation-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    color: #555;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: color 0.3s;
+}
+
+.navigation-button.active,
+.navigation-button:hover {
+    color: #6B8E23;
+}
+
+.navigation-label {
+    font-size: 12px;
+    margin-top: 5px;
+}
