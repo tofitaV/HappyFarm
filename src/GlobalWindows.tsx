@@ -8,7 +8,7 @@ import configData from "../config.json";
 
 const GlobalWindow = () => {
     const {tg, setTG} = useContext(MyContext);
-    const [data, setData] = useState("");
+    const [data, setData] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [authFailed, setAuthFailed] = useState(false);
 
@@ -31,6 +31,7 @@ const GlobalWindow = () => {
         } catch (error) {
             console.error('Error submitting plant data:', error);
             setAuthFailed(true);
+            throw error;
         }
     };
 
@@ -41,14 +42,13 @@ const GlobalWindow = () => {
                 try {
                     const id = await authorize(tg);
                     setData(id);
-                    setLoading(false);
                 } catch (error) {
-                    console.error('Error submitting plant data:', error);
+                    console.error('Error during fetchData:', error);
                 }
             } else {
                 setData(storedId);
-                setLoading(false);
             }
+            setLoading(false);
         };
 
         fetchData();
@@ -65,13 +65,13 @@ const GlobalWindow = () => {
     return (
         <div className='background-image'>
             <div className='field-wrapper'>
-                {data !== "" && (
+                {data && (
                     <div className='global-window'>
-                        <GameField/>
+                        <GameField />
                     </div>
                 )}
             </div>
-            {data !== "" && <FloatingButton/>}
+            {data && <FloatingButton />}
         </div>
     );
 };
