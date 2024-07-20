@@ -43,6 +43,10 @@ export const League: React.FC<LeagueModalProps> = ({ show, onClose }) => {
 
     const participants = timePeriod === 'week' ? leagueLeaders : leagueLeaders;
 
+    if (currentLeague.id == 69) {
+        return <div className="auth-failed">Opppss... Please log in again.</div>;
+    }
+
     return (
         <div className={`modal ${show ? 'show' : ''}`}>
             <div className="modal-content">
