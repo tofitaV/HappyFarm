@@ -73,7 +73,7 @@ const FloatingButton: React.FC = () => {
                         }}
                         className={`action-button ${action instanceof DigUpAction ? 'active' : ''}`}
                     >
-                        🏃
+                        🚮
                     </button>
                     <button
                         onClick={() => {
