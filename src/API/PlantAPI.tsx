@@ -3,6 +3,7 @@ import axios from 'axios';
 import {FairModel} from "../Models/FairModel";
 import {LeagueModel} from "../Models/LeagueModel";
 import configData from "../../config.json";
+import {PlantModel} from "../Plant/PlantModel";
 
 
 const apiService = async () => {
@@ -17,7 +18,7 @@ const apiService = async () => {
     });
 }
 
-export const createPlant = async (plant: Plant | null) => {
+export const createPlant = async (plant: PlantModel | null) => {
     try {
         await apiService().then(s => s.post('/plant', plant));
     } catch (error) {

@@ -13,8 +13,6 @@ import { DoNothing } from './Actions/DoNothing';
 import { FairModal } from './Fair';
 import { PlantStoreModal } from './PlantStoreModal';
 import { League } from './League/League';
-import SpinWheel from './DailyActivity/SpinWheel';
-import { WalletModal } from './wallet/WalletModal';
 import FriendsList from './Friends/FriendsList';
 
 const FloatingButton: React.FC = () => {

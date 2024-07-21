@@ -1,21 +1,18 @@
     import React, { createContext, useState, ReactNode } from 'react';
     import {Action} from "../Actions/Action";
     import {DoNothing} from "../Actions/DoNothing";
-    import {Plant} from "../Plant/Plants";
-    import {initCarrot} from "../Plant/Type/Carrot";
-    import {initCorn} from "../Plant/Type/Corn";
     import {initNothing} from "../Plant/Type/Nothing";
     import {Account} from "../Plant/Account";
-    import {getDepot} from "../API/PlantAPI";
     import {TelegramWebApps} from "telegram-webapps";
+    import {PlantModel} from "../Plant/PlantModel";
 
     interface ContextValueType {
         action: Action;
-        plant: Plant;
+        plant: PlantModel;
         account: Account;
         tg: TelegramWebApps.WebApp
         setAction: React.Dispatch<React.SetStateAction<Action>>;
-        setPlant: React.Dispatch<React.SetStateAction<Plant>>;
+        setPlant: React.Dispatch<React.SetStateAction<PlantModel>>;
         setAccount: React.Dispatch<React.SetStateAction<Account>>;
         setTG: React.Dispatch<React.SetStateAction<TelegramWebApps.WebApp>>;
     }

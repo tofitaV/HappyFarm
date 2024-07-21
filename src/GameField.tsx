@@ -9,6 +9,7 @@ import {DoNothing} from "./Actions/DoNothing";
 import {PlantEnum} from "./Plant/PlantEnum";
 import {HarvestAction} from "./Actions/HarvestAction";
 import {plants} from "./enums/PlantsEnum";
+import {PlantModel} from "./Plant/PlantModel";
 
 
 const GameField: React.FC = () => {
@@ -62,10 +63,10 @@ const GameField: React.FC = () => {
     };
 
     const placeIntoGardenBeds = useCallback(
-        (row: number, col: number, plant: Plant | undefined) => {
+        (row: number, col: number, plant: PlantModel | undefined) => {
             if (plant && plant?.plantType != PlantEnum.Nothing) {
-                let plantObject = {...plant, dateTime: new Date(), positionCol: col, positionRow: row};
-                createPlant(plantObject).then(() =>
+                let plantModel: PlantModel = {plantType: plant.plantType, positionCol: col, positionRow: row}
+                createPlant(plantModel).then(() =>
                     getPlants().then((res) => {
                         setCells(updateCells(res));
                     })
@@ -78,7 +79,6 @@ const GameField: React.FC = () => {
     const plantAction = useCallback(async (plant: Plant | null, action: Action) => {
             if (plant) {
                 const res = await action.doAction(plant)
-                console.log(res)
                 setCells(updateCells(res));
             }
             if (action instanceof HarvestAction) {
