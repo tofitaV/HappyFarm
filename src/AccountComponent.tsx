@@ -1,11 +1,8 @@
 import './Account.scss';
 import {Account} from "./Plant/Account";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faWallet} from '@fortawesome/free-solid-svg-icons';
 import React, {useState} from "react";
 import {plants} from "./enums/PlantsEnum";
 import {coins} from "./enums/CoinsEnam";
-import {WalletModal} from "./wallet/WalletModal";
 import ReactDOM from 'react-dom';
 import {TonConnectButton} from "@tonconnect/ui-react";
 import SpinWheel from "./DailyActivity/SpinWheel";
@@ -44,7 +41,8 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                 </div>
                 <TonConnectButton/>
                 <button onClick={toggleSpinWheel} className="spin-button">
-                    <img className="spin-button-img" src="public/assets/spin.gif" alt="Spin Button" />
+                    <img className="spin-button-img" src={new URL("/assets/spin.gif", import.meta.url).href}
+                         alt="Spin Button"/>
                 </button>
 
                 {ReactDOM.createPortal(
