@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './SpinWheel.scss';
 import {Wheel} from "react-custom-roulette";
-import {getDailySpin, getDailySpinRewards, getDepot} from "../API/PlantAPI";
+import {getDailySpin, getDailySpinRewards, getDepot, getSpinsStatus, purchaseSpin} from "../API/PlantAPI";
 import {WheelData} from "react-custom-roulette/dist/components/Wheel/types";
 import {WheelPrize} from "./WheelPrize";
 import {MyContext} from "../contexts/AppContext";
+import {SpinStatus} from "../Models/SpinStatus";
 
 interface SpinWheelModalProps {
     show: boolean;
@@ -26,6 +27,7 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
     const [showModal, setShowModal] = useState(false);
     const [winningPrize, setWinningPrize] = useState('');
     const [wheelPrizes, setWheelPrizes] = useState<WheelPrize[]>([]);
+    const [spinStatus, setSpinStatus] = useState<SpinStatus>();
 
     const handleSpinClick = async () => {
         await getDailySpin().then(res => {
@@ -60,7 +62,7 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
         if (item.option.includes(searchString)) {
             return {
                 ...item,
-                style: { backgroundColor: color }
+                style: {backgroundColor: color}
             };
         }
         return item;
@@ -79,12 +81,29 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
         })
     };
 
+    const buySpin = async () => {
+        await purchaseSpin().then(r => r);
+        await getSpinsStatus().then((res) => {
+            setSpinStatus(res)
+        })
+    };
+
+
+    useEffect(() => {
+        getSpinsStatus().then((res) => {
+            setSpinStatus(res)
+        })
+    }, [show, mustSpin]);
+
+
     return (
         <div className={`modal ${show ? 'show' : ''}`}>
             <div className={`modal-content`}>
                 <span className="close" onClick={onClose}>&times;</span>
                 <div className='spin-container'>
                     <h1>Spin the Wheel</h1>
+                    <div>Available spins: {spinStatus?.availableSpins}</div>
+                    <div>Free spins: {spinStatus?.hasFreeSpin ? "no" : "yes"}</div>
                     <div className='spin-bounce'>
                         <Wheel
                             mustStartSpinning={mustSpin}
@@ -97,6 +116,7 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
                         />
                     </div>
                     <button onClick={handleSpinClick} disabled={mustSpin}>SPIN</button>
+                    <button onClick={buySpin}>Purchase Spin</button>
                     {showModal && (
                         <div className="custom-modal-overlay" onClick={closeModal}>
                             <div className="custom-modal-box" onClick={(e) => e.stopPropagation()}>

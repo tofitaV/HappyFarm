@@ -11,8 +11,13 @@
 
     &__plants {
        display: flex;
-        //justify-content: center;
         align-items: center;
+    }
+
+    &__plants__img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
     }
 }
 
@@ -29,4 +34,26 @@
         fill: red;
     }
 
+}
+
+.spin-button {
+    max-height: 40px;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.spin-button-img {
+    height: 60px;
+    width: 60px;
+    animation: zoomInOut 3s infinite;
+}
+
+@keyframes zoomInOut {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
 }

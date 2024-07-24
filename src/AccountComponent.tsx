@@ -33,20 +33,18 @@ const AccountComponent: React.FC<AccountProps> = ({account}) => {
                 <div>
                     {filteredPlants.map((plant) => (
                         <div className='account__plants' key={plant.id}>
-                            <img src={plant.image} alt={plant.name}
-                                 style={{width: '30px', height: '30px', marginRight: '5px'}}/>
+                            <img src={plant.image} alt={plant.name} className='account__plants__img'/>
                             {account?.[`${plant.name.toLowerCase()}Count` as keyof Account]}
                         </div>
                     ))}
                     <div className='account__plants'>
-                        <img src={coins[0].image} alt={coins[0].name}
-                             style={{width: '30px', height: '30px', marginRight: '5px'}}/>
+                        <img className='account__plants__img' src={coins[0].image} alt={coins[0].name}/>
                         {account?.coins}
                     </div>
                 </div>
                 <TonConnectButton/>
-                <button onClick={toggleSpinWheel} style={{maxHeight: '40px'}}>
-                    {'Spin'}
+                <button onClick={toggleSpinWheel} className="spin-button">
+                    <img className="spin-button-img" src="public/assets/spin.gif" alt="Spin Button" />
                 </button>
 
                 {ReactDOM.createPortal(

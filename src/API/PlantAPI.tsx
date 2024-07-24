@@ -170,4 +170,28 @@ export const getDailySpinRewards = async () => {
     }
 };
 
+export const purchaseSpin = async () => {
+    try {
+        const response = await apiService().then(s => s.post('/purchase'));
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+export const getSpinsStatus = async () => {
+    try {
+        const response = await apiService().then(s => s.get('/status'));
+        if (response.status !== 200) {
+            throw new Error('Failed to fetch data');
+        }
+        return await response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
 
