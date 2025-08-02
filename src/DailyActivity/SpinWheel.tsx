@@ -105,15 +105,15 @@ const SpinWheel: React.FC<SpinWheelModalProps> = ({show, onClose}) => {
                     <div>Available spins: {spinStatus?.availableSpins}</div>
                     <div>Free spins: {spinStatus?.hasFreeSpin ? "no" : "yes"}</div>
                     <div className='spin-bounce'>
-                        <Wheel
-                            mustStartSpinning={mustSpin}
-                            prizeNumber={prizeNumber}
-                            data={data}
-                            pointerProps={{style: promptAlert}}
-                            onStopSpinning={() => {
-                                setMustSpin(false);
-                            }}
-                        />
+                        {/*<Wheel*/}
+                        {/*    mustStartSpinning={mustSpin}*/}
+                        {/*    prizeNumber={prizeNumber}*/}
+                        {/*    data={data}*/}
+                        {/*    pointerProps={{style: promptAlert}}*/}
+                        {/*    onStopSpinning={() => {*/}
+                        {/*        setMustSpin(false);*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </div>
                     <button onClick={handleSpinClick} disabled={mustSpin}>SPIN</button>
                     <button onClick={buySpin}>Purchase Spin</button>
